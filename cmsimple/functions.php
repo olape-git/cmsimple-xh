@@ -2598,13 +2598,9 @@ function XH_highlightSearchWords(array $words, $text)
  * @param string $className A class name.
  *
  * @return void
- *
- * @global array The paths of system files and folders.
  */
 function XH_autoload($className)
 {
-    global $pth;
-
     $className = str_replace('_', '\\', $className);
     // set $package, $subpackages and $class
     $subpackages = explode('\\', $className);
@@ -2615,9 +2611,9 @@ function XH_autoload($className)
 
     // construct $filename
     if ($package == 'XH') {
-        $folder = $pth['folder']['classes'];
+        $folder = __DIR__ . '/classes/';
     } else {
-        $folder = $pth['folder']['plugins'] . strtolower($package) . '/classes/';
+        $folder = __DIR__ . '/../plugins/' . strtolower($package) . '/classes/';
     }
     foreach ($subpackages as $subpackage) {
         $folder .= strtolower($subpackage) . '/';
