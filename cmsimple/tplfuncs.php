@@ -532,9 +532,13 @@ function languagemenu()
     }
 
     $t = '';
+    $preview_uri = '';
+    if (XH_ADM) {
+        $preview_uri = '?&normal&xhpages';
+    }
     foreach ($r as $lang) {
         $url = $pth['folder']['base']
-            . ($lang == $cf['language']['default'] ? '' : $lang . '/');
+            . ($lang == $cf['language']['default'] ? $preview_uri : $lang . '/' . $preview_uri);
         $img = $pth['folder']['templateflags'] . $lang . '.gif';
         if (!file_exists($img)) {
             $img = $pth['folder']['flags'] . $lang . '.gif';
