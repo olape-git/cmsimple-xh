@@ -451,8 +451,11 @@ if (document.cookie.indexOf('status=adm') == -1) {
     document.write('<div class="xh_warning">{$tx['error']['nocookies']}<\/div>');
 }
 </script>
-<noscript><div class="xh_warning">{$tx['error']['nojs']}</div></noscript>
+<div id="xhNoScript" class="xh_fail">{$tx['error']['nojs']}</div>
 <script>
+/* no-JavaScript warning: display: none; */
+document.getElementById("xhNoScript").style.setProperty("display", "none", "important");
+
 setInterval(function() {
     var request = new XMLHttpRequest();
 

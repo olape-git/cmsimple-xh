@@ -1319,9 +1319,47 @@ if ($print) {
 }
 
 if (XH_ADM) {
+    // for compatibility with old templates
+    if ($cf['site']['xhBoard-StartPosition'] == 'XH-Classic'
+    && ($s > -1
+    || $f == 'mailform'
+    || $f == 'sitemap'
+    || $f == 'search')) {
+        $pth['file']['adminjs'] = $pth['folder']['base'] . 'assets/js/classic-admin.min.js';
+    }
     $bjs .= '<script src="' . $pth['file']['adminjs']
         . '"></script>' . PHP_EOL
         . XH_adminJSLocalization();
+    // includes a JS script to hide the admin menu in the preview
+    if (!$edit
+    && ($s > -1
+    || $f == 'mailform'
+    || $f == 'sitemap'
+    || $f == 'search')
+    && !empty($cf['editmenu']['admin-menu-hidden'])
+    && empty($errors)
+    && $cf['site']['xhBoard-StartPosition'] != 'XH-Classic') {
+        $bjs .=<<<EOT
+<script>
+if ($('#xh_adminmenu_fixed').length) {
+    document.getElementById("xh_adminmenu_fixed").style.setProperty("display", "none");
+}
+</script>
+EOT;
+    }
+}
+
+// sets the paths to for the template in the backend (except edit and preview)
+if (XH_ADM && $s < 0
+&& $f != 'mailform'
+&& $f != 'sitemap'
+&& $f != 'search') {
+    $pth['folder']['template'] = $pth['folder']['templates'] . $cf['site']['admin-template'] . '/';
+    $pth['file']['template'] = $pth['folder']['template'] . 'xh_template.htm';
+    $pth['file']['stylesheet'] = $pth['folder']['template'] . 'xh_stylesheet.css';
+    $pth['folder']['menubuttons'] = $pth['folder']['template'] . 'menu/';
+    $pth['folder']['templateimages']=$pth['folder']['template'].'images/';
+    $pth['folder']['templateflags'] = $pth['folder']['template'] . 'flags/';
 }
 
 $_XH_controller->verifyAdm();

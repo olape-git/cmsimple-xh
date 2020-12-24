@@ -149,7 +149,7 @@ abstract class ArrayFileEdit extends FileEdit
                 return '<textarea name="' . $iname . '" rows="1" cols="50"'
                     . ' class="' . $class . '">'
                     . XH_hsc($opt['val'])
-                    . '</textarea>';
+                    . '</textarea>' . PHP_EOL;
             case 'bool':
                 return '<input type="checkbox" name="' . $iname . '"'
                     . ($opt['val'] ? ' checked="checked"' : '') . '>';
@@ -160,9 +160,9 @@ abstract class ArrayFileEdit extends FileEdit
                     $label = ($val == '')
                         ? ' label="' . $tx['label']['empty'] . '"'
                         : '';
-                    $o .= '<option' . $sel . $label . '>' . XH_hsc($val) . '</option>';
+                    $o .= '<option' . $sel . $label . '>' . XH_hsc($val) . '</option>' . PHP_EOL;
                 }
-                $o .= '</select>';
+                $o .= '</select>' . PHP_EOL;
                 return $o;
             case 'xenum':
                 $o = '<input type="text" name="' . $iname . '" value="'
@@ -175,12 +175,12 @@ abstract class ArrayFileEdit extends FileEdit
                         : '';
                     $o .= '<option' . $label . ' value="' . XH_hsc($val) . '">';
                 }
-                $o .= '</datalist>';
+                $o .= '</datalist>' . PHP_EOL;
                 return $o;
             case 'hidden':
             case 'random':
                 return '<input type="hidden" name="' . $iname . '" value="'
-                    . XH_hsc($opt['val']) . '">';
+                    . XH_hsc($opt['val']) . '">' . PHP_EOL;
             default:
                 return '<input type="text" name="' . $iname . '" value="'
                     . XH_hsc($opt['val'])
@@ -200,7 +200,12 @@ abstract class ArrayFileEdit extends FileEdit
         $title = $this->caption;
         $action = isset($this->plugin) ? $sn . '?&amp;' . $this->plugin : $sn;
         $value = utf8_ucfirst($tx['action']['save']);
-        $button = '<input type="submit" class="submit" value="' . $value . '">';
+        // $buttons_xhAccAll - backend accordion
+        $button = '<input type="submit" class="submit" value="' . $value . '">' . PHP_EOL;
+        $buttons_xhAccAll = '<div class="xhAccAll">
+    <span class="xhAccAllOpen" title="expand all"></span>
+    <span class="xhAccAllClose" title="collapse all"></span>
+</div>' . PHP_EOL;
         if (isset($_GET['xh_success'])) {
             $filetype = utf8_ucfirst($tx['filetype'][stsl($_GET['xh_success'])]);
             $message = XH_message('success', $tx['message']['saved'], $filetype);
@@ -209,14 +214,15 @@ abstract class ArrayFileEdit extends FileEdit
         }
         $o = '<h1>' . $this->caption . '</h1>' . $message
             . '<form id="xh_config_form" action="' . $action
-            . '" method="post" accept-charset="UTF-8">'
+            . '" method="post" accept-charset="UTF-8">' . PHP_EOL
             . $button
+            . $buttons_xhAccAll
             . $this->renderFormFields(false)
             . '<div id="xh_config_form_advanced">'
-            . $this->renderFormFields(true) . '</div>';
+            . $this->renderFormFields(true) . '</div>' . PHP_EOL;
         foreach ($this->params as $param => $value) {
             $o .= '<input type="hidden" name="' . $param . '" value="'
-                . $value . '">';
+                . $value . '">' . PHP_EOL;
         }
         $o .= $_XH_csrfProtection->tokenInput();
         $o .= $button . '</form>';
@@ -237,8 +243,12 @@ abstract class ArrayFileEdit extends FileEdit
         foreach ($this->cfg as $category => $options) {
             $hasVisibleFields = $this->hasVisibleFields($options, $advanced);
             if ($hasVisibleFields) {
-                $o .= '<fieldset><legend>' . $this->translate($category)
-                    . '</legend>';
+                // backend accordion
+                $o .= '<div class="xhAccordion">' . PHP_EOL
+                    . '<div class="xhAccordionTitle">'
+                    . $this->translate($category)
+                    . '</div>' . PHP_EOL
+                    . '<div class="xhAccordionContent">' . PHP_EOL;
             }
             foreach ($options as $name => $opt) {
                 if ($opt['isAdvanced'] != $advanced) {
@@ -251,21 +261,21 @@ abstract class ArrayFileEdit extends FileEdit
                     $displayName = $name != ''
                         ? str_replace('_', ' ', $name)
                         : $category;
-                    $o .= '<div class="xh_label">'
+                    $o .= '<div class="xh_label">' . PHP_EOL
                         . $info . '<span class="xh_label">'
                         . $this->translate($displayName) . '</span>';
                     if ($category == 'meta' && $name == 'description') {
                         $o .= ' <span id="xh_description_length">['
                             . utf8_strlen($opt['val']) . ']</span>';
                     }
-                    $o .= '</div>'
-                        . '<div class="xh_field">'
+                    $o .= '</div>' . PHP_EOL
+                        . '<div class="xh_field">' . PHP_EOL
                         . $this->formField($category, $name, $opt) . '</div>'
                         . '<br>';
                 }
             }
             if ($hasVisibleFields) {
-                $o .= '</fieldset>';
+                $o .= '</div>' . PHP_EOL . '</div>' . PHP_EOL;
             }
         }
         return $o;

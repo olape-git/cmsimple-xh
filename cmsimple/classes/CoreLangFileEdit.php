@@ -44,7 +44,7 @@ class CoreLangFileEdit extends CoreArrayFileEdit
                         $co['type'] = 'hidden';
                     } else {
                         $co['type'] = 'enum';
-                        $co['vals'] = $this->selectOptions('templates', '/^([^\.]*)$/i');
+                        $co['vals'] = XH_templates();
                         array_unshift($co['vals'], '');
                     }
                 }

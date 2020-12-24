@@ -11,6 +11,8 @@ $tx['locale']['all']="";
 $tx['template']['text1']="Text 1 for templates requiring this text";
 $tx['template']['text2']="Text 2 for templates requiring this text";
 $tx['template']['text3']="Text 3 for templates requiring this text";
+$tx['template']['active']="Active Template: ";
+$tx['template']['default']="default template";
 
 $tx['urichar']['new']="-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-";
 $tx['urichar']['org']="&amp;|'|§|%|:|/|?|#|[|]|@|!|$|&|'|(|)|*|+|,|;|=|\"";
@@ -50,6 +52,7 @@ $tx['editmenu']['stylesheet']="Stylesheet";
 $tx['editmenu']['sysinfo']="Info";
 $tx['editmenu']['template']="Template";
 $tx['editmenu']['validate']="Validate links";
+$tx['editmenu']['selectnav']="::: Page selection :::";
 
 $tx['error']['401']="Error 401: Unauthorized";
 $tx['error']['403']="Error 403: Forbidden";
@@ -68,7 +71,7 @@ $tx['error']['nopagemanager']="External pagemanager \"%s\" missing!";
 $tx['error']['headers']="Cannot modify header information - headers already sent (output started at {location})";
 $tx['error']['missing']="Missing";
 $tx['error']['nocookies']="Please enable Cookies!";
-$tx['error']['nojs']="Please enable Javascript!";
+$tx['error']['nojs']="<strong>JavaScript cannot be executed!</strong><br>Please enable JavaScript or fix JavaScript errors. See Console.";
 $tx['error']['notreadable']="Not readable";
 $tx['error']['notwritable']="Not writeable";
 $tx['error']['plugincall']="Function %s() is not defined!";
@@ -89,6 +92,8 @@ $tx['filetype']['template']="template";
 $tx['help']['downloads_maxsize']="Maximum size of uploaded files in Byte. This must neither exceed the limit set for upload_max_filesize nor post_max_size in the PHP configuration.";
 $tx['help']['editmenu_scroll']="Whether the admin menu shall scroll with your webpage. Not checked = fixed admin menu.";
 $tx['help']['editmenu_external']="If you want to use an external admin menu, install it as a plugin and enter its function name here.";
+$tx['help']['editmenu_admin-menu-hidden']="Minimize admin menu in preview mode.<br>Without function if <b>Edit menu</b> - <b>Scroll</b> enabled.<br>Without function if <b>Site</b> - <b>XhBoard-StartPosition</b> - <b>Xh-Classic</b>.";
+
 $tx['help']['editor_height']="Integer or JavaScript expression returning an integer for editor height in pixels.";
 $tx['help']['editor_external']="Enter here the name of the wanted editor, which has to be installed as a plugin. There is no internal editor.";
 $tx['help']['filebrowser_external']="If you want to use an external file browser, e.g. hi_kcfinder, install the plugin and enter its name here.";
@@ -121,6 +126,8 @@ $tx['help']['security_password']="Password of the site and all secondary languag
 $tx['help']['security_email']="The email address for the password forgotten functionality. It is preferable to use an address that is not publicly known.";
 $tx['help']['security_frame_options']="Whether pages of your site are allowed to be displayed in frames: \"DENY\" means never, \"SAMEORIGIN\" means only on pages from the same domain. Leave empty to allow framing, what is, however, not recommended for security reasons.";
 $tx['help']['site_template']="Default template of the site";
+$tx['help']['site_admin-template']="Admin-Template";
+$tx['help']['site_xhBoard-StartPosition']="Sets the start position of the xhBoard.";
 $tx['help']['site_timezone']="Usually no entry necessary; a <a href=\"http://www.php.net/manual/en/timezones.php\">time zone</a> can be entered to override your server's setting (see http://www.php.net/manual/en/timezones.php).";
 $tx['help']['site_compat']="Whether the website needs functions that have been removed in CMSimple_XH 1.7.";
 $tx['help']['title_format']="The way the title of a page of your site (&lt;title&gt;) is shown in the tab of your browser.";
@@ -211,6 +218,7 @@ $tx['menu']['tab_help']="Help";
 
 $tx['message']['backedup']="The content has been successfully backed up.";
 $tx['message']['debug_mode']="Debug-Mode is enabled!";
+$tx['message']['debug_show']="PHP messages show/hide";
 $tx['message']['emptied']="The content has been successfully emptied.";
 $tx['message']['pd_success']="Page data successfully saved. Some settings may only become effective after page refresh or browsing to another page.";
 $tx['message']['pd_fail']="The page data could not be saved. Please try again.";
@@ -295,9 +303,6 @@ $tx['sysinfo']['plugins']="Installed Plugins";
 $tx['sysinfo']['version']="Installed CMSimple Version";
 $tx['sysinfo']['unknown']="Webserver could not be determined";
 $tx['sysinfo']['webserver']="Webserver";
-
-$tx['template']['active']="Active Template: ";
-$tx['template']['default']="default template";
 
 $tx['title']['bad_request']="Bad request";
 $tx['title']['change_password']="Change Password";

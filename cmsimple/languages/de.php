@@ -11,6 +11,8 @@ $tx['locale']['all']="";
 $tx['template']['text1']="Text 1 für entsprechend vorbereitete Templates";
 $tx['template']['text2']="Text 2 für entsprechend vorbereitete Templates";
 $tx['template']['text3']="Text 3 für entsprechend vorbereitete Templates";
+$tx['template']['active']="Aktives Template: ";
+$tx['template']['default']="Standard Template";
 
 $tx['urichar']['new']="-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|ae|oe|ue|ss|Ae|Oe|Ue";
 $tx['urichar']['org']="&amp;|'|§|%|:|/|?|#|[|]|@|!|$|&|'|(|)|*|+|,|;|=|\"|ä|ö|ü|ß|Ä|Ö|Ü";
@@ -50,6 +52,7 @@ $tx['editmenu']['stylesheet']="Stylesheet";
 $tx['editmenu']['sysinfo']="Info";
 $tx['editmenu']['template']="Template";
 $tx['editmenu']['validate']="Links prüfen";
+$tx['editmenu']['selectnav']="::: Seiten-Auswahl :::";
 
 $tx['error']['401']="Fehler 401: Nicht erlaubt";
 $tx['error']['403']="Error 403: Verboten";
@@ -68,7 +71,7 @@ $tx['error']['nopagemanager']="Der externe Pagemanager \"%s\" fehlt!";
 $tx['error']['headers']="Header-Information kann nicht geändert werden - die Header wurden bereits verschickt (die Ausgabe begann in {location})";
 $tx['error']['missing']="Fehlt";
 $tx['error']['nocookies']="Bitte Cookies aktivieren!";
-$tx['error']['nojs']="Bitte Javascript aktivieren!";
+$tx['error']['nojs']="<strong>JavaScript kann nicht ausgeführt werden!</strong><br>Bitte JavaScript aktivieren, oder JavaScript-Fehler beseitigen. Siehe Konsole.";
 $tx['error']['notreadable']="Nicht lesbar";
 $tx['error']['notwritable']="Nicht schreibbar";
 $tx['error']['plugincall']="Funktion %s() ist nicht definiert!";
@@ -89,13 +92,13 @@ $tx['filetype']['template']="Template-Datei";
 $tx['help']['downloads_maxsize']="Maximale Größe für das Hochladen von Datein in Byte. Dieser Wert darf weder upload_max_filesize noch post_max_size in der PHP-Konfiguration überschreiten.";
 $tx['help']['editmenu_scroll']="Angeklickt = das Admin Menü scrollt mit";
 $tx['help']['editmenu_external']="Wenn Sie ein externes Admin-Menü nutzen wollen, installieren Sie es als Plugin und tragen Sie seinen Funktionsnamen hier ein.";
+$tx['help']['editmenu_admin-menu-hidden']="Adminmenü im Vorschaumode minimieren.<br>Ohne Funktion wenn <b>Bearbeitungsmenü (Admin-Menü)</b> - <b>Scrollen</b> aktiviert.<br>Ohne Funktion wenn <b>Site</b> - <b>XhBoard-StartPosition</b> - <b>Xh-Classic</b>.";
 $tx['help']['editor_height']="Integer oder JavaScript-Ausdruck, der einen Integer liefert für die Editorhöhe in Pixel.";
 $tx['help']['editor_external']="Hier den Namen in Kleinbuchstaben des zu benutzenden Editors eintragen. Dieser muss als Plugin installiert sein (einen internen Editor gibt es nicht mehr).";
 $tx['help']['filebrowser_external']="Wenn Sie einen externen Datei-Browser verwenden möchten, z.B. hi_kcfinder, installieren Sie das Plugin und tragen Sie seinen Namen hier ein";
 $tx['help']['functions_file']="Bitte nicht ändern";
 $tx['help']['meta_author']="(Kann-Eingabe) Hier für Suchmaschinen den Autor der Texte Ihrer Site eintragen.";
 $tx['help']['backup_numberoffiles']="Nach jedem Ausloggen erzeugt das System eine Sicherungskopie der Content-Datei. Hier die Anzahl solcher Dateien eintragen, die das System automatisch aufbewahrt.";
-
 
 $tx['help']['show_hidden_path_locator']="Angeklickt = Der Locator ('Sie sind hier'-Anzeige) zeigt auch den Pfad einer versteckten Seite.";
 $tx['help']['show_hidden_pages_search']="Angeklickt = Auch versteckte Seiten werden in den Ergebnissen der internen Suchfunktion angegeben.";
@@ -122,6 +125,8 @@ $tx['help']['security_password']="Passwort für die Website einschließlich alle
 $tx['help']['security_email']="Die E-Mail-Adresse für die 'Kennwort vergessen'-Funktionalität. Am besten verwenden Sie eine Adresse, die nicht öffentlich bekannt ist.";
 $tx['help']['security_frame_options']="Ob Seiten Ihrer Website in Frames angezeigt werden dürfen: \"DENY\" bedeutet niemals, \"SAMEORIGIN\" bedeutet nur auf Seiten der selben Domain. Lassen sie die Einstellung leer, um die Darstellung in Frames zu erlauben; das ist allerdings aus Sicherheitsgründen nicht zu empfehlen.";
 $tx['help']['site_template']="Standard-Template für die Website";
+$tx['help']['site_admin-template']="Admin-Template";
+$tx['help']['site_xhBoard-StartPosition']="Legt die Startposition des xhBoards fest.";
 $tx['help']['site_timezone']="Normalerweise keine Einstellung erforderlich; es kann eine vom Server abweichende <a href=\"http://www.php.net/manual/de/timezones.php\">Zeitzone</a> eingeben werden (siehe http://php.net/manual/de/timezones.php).";
 $tx['help']['site_compat']="Benötigt die Website Funktionen, die in CMSimple_XH 1.7 entfernt wurden?";
 $tx['help']['title_format']="Das Format des Seitentitels (&lt;title&gt;) wie er normalerweise oben in den Seitenreitern des Browsers angezeigt wird.";
@@ -212,6 +217,7 @@ $tx['menu']['tab_help']="Hilfe";
 
 $tx['message']['backedup']="Der Content wurde erfolgreich gesichert.";
 $tx['message']['debug_mode']="Debug-Modus ist aktiv!";
+$tx['message']['debug_show']="PHP-Meldungen an/aus";
 $tx['message']['emptied']="Der Content wurde erfolgreich geleert.";
 $tx['message']['pd_success']="Seitenspezifische Daten erfolgreich gespeichert. Manche Einstellungen werden erst nach Seitenaktualisierung oder Wechsel zu anderer Seite wirksam.";
 $tx['message']['pd_fail']="Die seitenspezifischen Daten konnten nicht gespeichert werden. Bitte versuchen Sie es erneut.";
@@ -296,9 +302,6 @@ $tx['sysinfo']['plugins']="Installierte Plugins";
 $tx['sysinfo']['version']="Installierte CMSimple Version";
 $tx['sysinfo']['unknown']="Webserver konnte nicht ermittelt werden";
 $tx['sysinfo']['webserver']="Webserver";
-
-$tx['template']['active']="Aktives Template: ";
-$tx['template']['default']="Standard Template";
 
 $tx['title']['bad_request']="Inkorrekte Anfrage";
 $tx['title']['change_password']="Passwort ändern";

@@ -476,7 +476,7 @@ function XH_pluginsView()
     natcasesort($plugins);
     $plugins = array_values($plugins);
 
-    $o = '<h1>' . $tx['title']['plugins'] . '</h1><ul>';
+    $o = '<h1>' . $tx['title']['plugins'] . '</h1><ul id="xhPluginList">';
     foreach ($plugins as $plugin) {
         $item = array(
             'label' => utf8_ucfirst($plugin),
@@ -580,7 +580,7 @@ function XH_registerPluginMenuItem($plugin, $label = null, $url = null, $target 
  */
 function XH_adminMenu(array $plugins = array())
 {
-    global $sn, $edit, $s, $u, $cf, $tx, $su, $plugin_tx;
+    global $sn, $edit, $s, $u, $cf, $tx, $su, $plugin_tx, $f;
 
     if ($s < 0) {
         $su = $u[0];
@@ -706,8 +706,51 @@ function XH_adminMenu(array $plugins = array())
     foreach ($menu as $item) {
         $t .= XH_adminMenuItem($item);
     }
-    $t .= '</ul>' . "\n"
-        . '<div class="xh_break"></div>' . "\n" . '</div>' . "\n";
+    $t .= '</ul>' . "\n";
+// admin menu extension
+// @since 1.8
+    $xhblrc = $cf['site']['xhBoard-StartPosition'];
+    $xhbscr = $cf['editmenu']['scroll'];
+    if ($xhblrc == 'XH-Classic'
+    && $s < 0
+    && $f != 'mailform'
+    && $f != 'sitemap'
+    && $f != 'search') {
+            $t .= xhBoardSelectNav() . PHP_EOL
+                . '<div class="xhLangMenu">'
+                . languagemenu()
+                . '</div>' . PHP_EOL
+                . '</div>' . PHP_EOL;
+    }
+    if ($xhblrc == 'XH-Classic'
+    && ($s > -1
+    || $f == 'mailform'
+    || $f == 'sitemap'
+    || $f == 'search')) {
+        $t .= '<div class="xh_break"></div>' . PHP_EOL
+            . '</div>' . PHP_EOL;
+    }
+    if ($xhblrc != 'XH-Classic') {
+        $t .= '<div class="xhLangMenu">'
+            . languagemenu()
+            . '</div>' . PHP_EOL
+            . '</div>' . PHP_EOL
+            . '</div>' . PHP_EOL
+            . '<div id="xhBoard" class="'
+            . $xhblrc . '">' . PHP_EOL
+            . '<div class="xhBoardInner">' . PHP_EOL;
+        if ($xhbscr == '') {
+            $t .= XH_AdminMenuToggleBtn() . PHP_EOL;
+        }
+        $t .= XH_BoardChangeModeLink() . PHP_EOL
+            . xhBoardSelectNav() . PHP_EOL
+            . '<div id="xhBoardLogout"><a title="'
+            . $tx['editmenu']['logout']
+            . '" href="'
+            . $sn
+            . '?&logout"> </a></div>' . PHP_EOL
+            . '</div>' . PHP_EOL;
+    }
     return $t;
 }
 
@@ -808,6 +851,104 @@ function plugin_admin_common()
     }
 }
 
+/**
+ * Returns an element with changing classes.
+ *
+ * @return HTML.
+ *
+ * @since 1.8
+ */
+function XH_AdminMenuToggleBtn()
+{
+    global $edit, $s, $f, $errors;
+
+    $xhAdminmenuToggleClass = 'xhAdminmenuToggleBtnClosed';
+
+    if (!empty($errors)
+    || $edit
+    || ($s < 0
+    && $f != 'sitemap'
+    && $f != 'mailform'
+    && $f != 'search')) {
+        $xhAdminmenuToggleClass = 'xhAdminmenuToggleBtnOpen';
+    }
+    return $element = '<div id="xhAdminmenuToggleBtn" class="'
+                    . $xhAdminmenuToggleClass
+                    . '" title="XH menu on/off"> </div>';
+}
+
+/**
+ * Returns a link for switching between edit and preview.
+ *
+ * @return HTML.
+ *
+ * @since 1.8
+ */
+function XH_BoardChangeModeLink()
+{
+    global $edit, $tx, $sn, $su;
+
+    $changeMode = 'edit';
+    $changeTitle = $tx['editmenu']['edit'];
+    $changeClass = 'modeLinkPreview';
+
+    if ($edit) {
+        $changeMode = 'normal';
+        $changeTitle = $tx['editmenu']['normal'];
+        $changeClass = 'modeLinkEdit';
+    }
+    $url = $sn . '?' . $su . '&' . $changeMode;
+    return $link = '<div id="XH_changeModeLink"><a title="'
+                  . $changeTitle
+                  . '" class="'
+                  . $changeClass
+                  . '" href="'
+                  . $url
+                  . '"> </a></div>';
+}
+
+/**
+ * Returns a navigation menu as select element.
+ * The navigation requires JavaScript to be enabled.
+ *
+ * obtained from hi_Admin for CMSimple_XH Version: 1.0beta1 - 2014-05-30
+ * ©2014 Holger Irmler - all rights reserved - http://CMSimple.HolgerIrmler.de
+ *
+ * @return (X)HTML.
+ *
+ * @since 1.8
+ */
+function xhBoardSelectNav()
+{
+    global $sn, $h, $u, $l, $s, $tx;
+
+    $selectClass = 'xhBoardSelectNav';
+    $pref = '&thinsp;&middot;&thinsp;';
+    $x = '<select class="'
+        . $selectClass
+        . '" onchange="if (this.value) location = this.value">' . PHP_EOL;
+    if ($s < 0) {
+        $x .= '<option value="">'
+            . $tx['editmenu']['selectnav']
+            . '</option>' . PHP_EOL;
+    }
+    foreach ($h as $k => $v) {
+        $indent = str_repeat($pref, $l[$k] - 1);
+        $selected = $k == $s ? ' selected="selected"' : '';
+        $url = $sn . '?' . $u[$k] . '&edit';
+        $x .= '<option value="'
+            . $url
+            . '"'
+            . $selected
+            . '>'
+            . $indent
+            . $h[$k]
+            . '</option>'
+            . PHP_EOL;
+    }
+    $x .= '</select>';
+    return $x;
+}
 
 /**
  * Returns the content editor and activates it.

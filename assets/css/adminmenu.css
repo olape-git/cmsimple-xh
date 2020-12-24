@@ -1,0 +1,309 @@
+/**
+ * adninmenu.css for CMSimple_XH.
+ *
+ * @author    The CMSimple_XH developers <devs@cmsimple-xh.org>
+ * @copyright 2009-2020 The CMSimple_XH developers <http://cmsimple-xh.org/?The_Team>
+ * @license   http://www.gnu.org/licenses/gpl-3.0.en.html GNU GPLv3
+ * @see       http://cmsimple-xh.org/
+ * @since     1.8
+**/
+
+/* XH board */
+#xhBoard {
+    all: initial;
+    line-height: normal;
+    position: fixed;
+    box-sizing: border-box;
+    z-index: 1000;
+}
+.xhBoardInner {
+    display: flex;
+    flex-wrap: nowrap;
+    box-sizing: border-box;
+    background: #2e3436;
+    border: 1px solid #000;
+    border-radius: 5px;
+}
+#xhBoard a {
+    box-sizing: border-box;
+}
+#xhBoard.xhBoard-Center {
+    bottom: .5em;
+    left: 50%;
+    transform: translateX(-50%);
+}
+#xhBoard.xhBoard-Left {
+    left: .5em;
+    bottom: .5em;
+}
+#xhBoard.xhBoard-Right {
+    right: 2.5em;
+    bottom: .5em;
+}
+#xhAdminmenuToggleBtn {
+    height: 32px;
+    width: 32px;
+    cursor: pointer;
+    border: 1px solid #000;
+    border-radius: 5px;
+    margin: 0.25em;
+    background-color: #fff;
+    box-sizing: border-box;
+}
+#xhAdminmenuToggleBtn:hover {
+    background-color: #e60;
+}
+#xhAdminmenuToggleBtn.xhAdminmenuToggleBtnClosed {
+    background-image: url(xh-menu-on.svg);
+    background-size: cover;
+}
+#xhAdminmenuToggleBtn.xhAdminmenuToggleBtnOpen {
+    background-image: url(xh-menu-off.svg);
+    background-size: cover;
+}
+#XH_changeModeLink {
+    height: 32px;
+    width: 32px;
+    border: 1px solid #000;
+    border-radius: 5px;
+    margin: 0.25em;
+    box-sizing: border-box;
+}
+#XH_changeModeLink a {
+    display: inline-block !important;
+    color: #fff !important;
+    padding: 0 !important;
+    text-decoration: none !important;
+    font-weight: normal !important;
+    line-height: normal !important;
+    height: 100%;
+    width: 100%;
+    background-color: #fff;
+    border-radius: 5px;
+}
+#XH_changeModeLink a:hover {
+    color: #fff !important;
+    text-decoration: none !important;
+    background-color: #e60;
+}
+#XH_changeModeLink a.modeLinkPreview {
+    background-image: url(xh-link-preview.svg);
+    background-size: cover;
+}
+#XH_changeModeLink a.modeLinkEdit {
+    background-image: url(xh-link-edit.svg);
+    background-size: cover;
+}
+#xhBoardLogout {
+    height: 32px;
+    width: 32px;
+    border: 1px solid #000;
+    border-radius: 5px;
+    margin: 0.25em;
+    box-sizing: border-box;
+}
+#xhBoardLogout a {
+    display: inline-block !important;
+    color: #fff !important;
+    padding: 0 !important;
+    text-decoration: none !important;
+    font-weight: normal !important;
+    line-height: normal !important;
+    height: 100%;
+    width: 100%;
+    background-color: #fff;
+    background-image: url(xh-logout.svg);
+    background-size: cover;
+    border-radius: 5px;
+}
+#xhBoardLogout a:hover {
+    color: #fff !important;
+    text-decoration: none !important;
+    background-color: #e60;
+}
+/* admin menu */
+#xh_adminmenu_fixed {
+}
+#xh_adminmenu_scrolling {
+    z-index: 999;
+    position: relative;
+}
+#xh_adminmenu_fixed {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 999;
+    box-sizing: border-box;
+}
+#xh_adminmenu {
+    width: 100%;
+    background-color: #2e3436;
+    padding: 0;
+    margin: 0;
+    overflow: visible;
+    border-bottom: 1px solid #ccc;
+    color: #d3d7cf;
+    font: normal 15px/1.0em system-ui, sans-serif !important;
+    box-sizing: border-box;
+    text-align: right;
+}
+#xh_adminmenu ul {
+    list-style-type: none !important;
+    margin: 0;
+    padding: 0;
+    background-color: #2e3436;
+    box-sizing: border-box;
+    float: left;
+}
+#xh_adminmenu li {
+    list-style-type: none !important;
+    float: left;
+    position: relative;
+    width: 150px;
+    background-color: #2e3436;
+    text-align: center;
+    color: #d3d7cf;
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+#xh_adminmenu a,
+#xh_adminmenu a:visited,
+#xh_adminmenu span {
+    border: unset;
+    text-shadow: unset;
+    box-shadow: unset;
+    display: unset;
+    position: unset;
+    font-style: unset;
+    color: unset;
+    padding-top: unset;
+    padding-right: unset;
+    padding-bottom: unset;
+    padding-left: unset;
+    box-sizing: unset;
+    text-decoration-line: unset;
+    text-decoration-style: unset;
+    text-decoration-color: unset;
+    text-decoration-thickness: unset;
+    box-sizing: border-box;
+    display: block;
+    color: #d3d7cf;
+    padding: 10px;
+    text-decoration: none;
+    font-style: normal;
+    position: relative;
+}
+#xh_adminmenu li a:hover {
+    background-color: #3f4446;
+}
+#xh_adminmenu ul ul {
+    all: unset;
+    list-style-type: none !important;
+    height: 0;
+    left: 0;
+    position: absolute;
+    margin: 0;
+    visibility: hidden;
+    z-index: 9999;
+}
+#xh_adminmenu ul ul li {
+    background: #4f5456;
+}
+#xh_adminmenu ul ul li:hover,
+#xh_adminmenu ul ul a:hover {
+    background: #c50;
+}
+#xh_adminmenu ul ul li a:hover {
+    background: #c50;
+}
+#xh_adminmenu ul ul ul {
+    left: 100%;
+    top: 0;
+    width: 100%;
+    visibility: hidden;
+    padding: 0;
+    margin: 0;
+}
+#xh_adminmenu ul ul ul li {
+    background: #c50;
+}
+#xh_adminmenu ul ul ul a:hover {
+    background: #e70;
+}
+#xh_adminmenu ul ul ul li a:hover,
+#xh_adminmenu ul ul ul li span:hover {
+    background: #e70;
+}
+#xh_adminmenu li:hover > ul {
+    visibility: visible;
+}
+#xh_adminmenu span {
+    cursor: default;
+}
+#xh_adminmenu span:empty:before {
+    content: "\00a0";
+}
+/* language menu */
+.xhLangMenu {
+    display: inline-block;
+    min-height: calc(2em + 5px);
+}
+.xhLangMenu a {
+    display: inline-block !important;
+    padding: 5px .25em !important;
+}
+.xhLangMenu img.flag {
+    border: 1px solid rgba(255,255,255,.25) !important;
+    height: 24px !important;
+    width: 32px !important;
+    vertical-align: initial !important;
+    box-sizing: border-box;
+}
+/* miscellaneous */
+div.xh_break {
+    float: none;
+    clear: both;
+    padding: 0;
+    border: 0;
+    margin: 0;
+    width: 100%;
+}
+/* select navigation */
+select.xhBoardSelectNav {
+    box-sizing: border-box;
+    font: normal 13px/1.0em system-ui, sans-serif !important;
+    background: #2e3436 !important;
+    color: #d3d7cf !important;
+    border: 1px solid #666 !important;
+    margin: .5em !important;
+    padding: .25em 0 !important;
+    cursor: pointer !important;
+}
+select.xhBoardSelectNav option[selected] {
+    background: #c50;
+}
+#xh_adminmenu select.xhBoardSelectNav {
+    margin: 4px .5em !important;
+    vertical-align: top !important;
+}
+/* Edit/Preview and Logout in admin menu */
+#xh_adminmenu > ul > li:first-child,
+#xh_adminmenu > ul > li:nth-child(6) {
+    /* display: none; */
+}
+/* update check */
+li#xh_adminmenu_update {
+    padding: 0 !important;
+    width: 2em !important;
+}
+li#xh_adminmenu_update a {
+    width: 2em !important;
+}
+#xh_adminmenu_update img {
+    width: 14px !important;
+    height: 14px !important;
+    max-width: initial !important;
+    vertical-align: initial !important;
+}

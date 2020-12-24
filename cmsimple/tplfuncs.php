@@ -77,6 +77,11 @@ function head()
         . $hjs
         . '<link rel="stylesheet" href="' . $pth['file']['stylesheet']
         . '" type="text/css">' . "\n";
+    if (XH_ADM) {
+        $o .= '<link rel="stylesheet" href="'
+            . XH_AdminMenuCSS()
+            . '" type="text/css">' . "\n";
+    }
     return $o;
 }
 

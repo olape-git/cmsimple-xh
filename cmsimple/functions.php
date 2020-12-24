@@ -446,8 +446,13 @@ function XH_finalCleanUp($html)
 
         if (error_reporting() > 0) {
             $debugHint .= '<div class="xh_debug">' . "\n"
-                . $tx['message']['debug_mode'] . "\n"
-                . '</div>' . "\n";
+                . $tx['message']['debug_mode'] . "\n";
+            if (count($errors) > 0) {
+                $debugHint .= '<div id="xhShowDebugMsg" title="'
+                            . $tx['message']['debug_show']
+                            . '" class="xhDebugMsgShow"> </div>';
+            }
+            $debugHint .= '</div>' . "\n";
         }
 
         $adminMenuFunc = trim($cf['editmenu']['external']);
@@ -456,7 +461,7 @@ function XH_finalCleanUp($html)
         }
 
         if (count($errors) > 0) {
-            $errorList .= '<div class="xh_debug_warnings"><ul>';
+            $errorList .= '<div id="xhDebugWarnings" class="xh_debug_warnings"><ul>';
             $errors = array_unique($errors);
             foreach ($errors as $error) {
                 $errorList .= '<li>' . $error . '</li>';
@@ -474,7 +479,7 @@ function XH_finalCleanUp($html)
         $adminMenu = $adminMenuFunc(XH_plugins(true));
         $replacement = '$0' . '<div' . $id . '>' . addcslashes($debugHint, '$\\')
             . addcslashes($adminMenu, '$\\')
-            . '</div>' ."\n" . addcslashes($errorList, '$\\');
+            . '</div>' . "\n" . addcslashes($errorList, '$\\');
         $html = preg_replace('~<body[^>]*>~i', $replacement, $html, 1);
     }
 
@@ -1661,6 +1666,36 @@ function XH_pluginStylesheet()
 }
 
 /**
+ * Returns the path of the adminmenu.css.
+ *
+ * @return string
+ *
+ * @since 1.8
+ */
+function XH_AdminMenuCSS()
+{
+    global $pth, $cf, $tx;
+
+    $adminmenucss = $pth['folder']['corestyle'] . 'adminmenu.css';
+    if (is_readable($pth['folder']['templates']
+                  . $cf['site']['template']
+                  . '/adminmenu.css')) {
+        $adminmenucss = $pth['folder']['templates']
+                      . $cf['site']['template']
+                      . '/adminmenu.css';
+    }
+    if (!empty($tx['subsite']['template'])
+    && is_readable($pth['folder']['templates']
+     . $tx['subsite']['template']
+     . '/adminmenu.css')) {
+         $adminmenucss = $pth['folder']['templates']
+                       . $tx['subsite']['template']
+                       . '/adminmenu.css';
+     }
+     return $adminmenucss;
+}
+
+/**
  * Adjusts all relative url(...) in a stylesheet to be used
  * in the combined plugin stylesheet.
  *
@@ -1789,6 +1824,7 @@ function XH_builtinTemplate($bodyClass)
     }
     exit;
 }
+
 /**
  * Returns a help icon which displays a tooltip on hover.
  *
@@ -1837,7 +1873,7 @@ function XH_isContentBackup($filename, $regularOnly = true)
  *
  * @since 1.6
  */
-function XH_templates()
+function XH_templates($htm = 'template.htm')
 {
     global $pth;
 
@@ -1846,7 +1882,7 @@ function XH_templates()
         while (($file = readdir($handle)) !== false) {
             $dir = $pth['folder']['templates'] . $file;
             if ($file[0] != '.' && is_dir($dir)
-                && file_exists($dir . '/template.htm')
+                && file_exists($dir . '/' . $htm)
             ) {
                 $templates[] = $file;
             }
@@ -1855,6 +1891,18 @@ function XH_templates()
     }
     natcasesort($templates);
     return $templates;
+}
+
+/**
+ * Returns an array of installed admin-templates.
+ *
+ * @return array
+ *
+ * @since 1.8
+ */
+function XH_adm_tpl()
+{
+    return XH_templates('xh_template.htm');
 }
 
 /**
@@ -1907,6 +1955,7 @@ function XH_secondLanguages()
     }
     return $langs;
 }
+
 /**
  * Returns whether a path refers to a CMSimple index.php.
  *

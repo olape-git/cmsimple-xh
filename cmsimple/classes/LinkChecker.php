@@ -358,10 +358,10 @@ class LinkChecker
         $o .= '<p><b>' . $tx['link']['check_errors'] . '</b></p>' . "\n";
         $o .= '<p>' . $tx['link']['check'] . '</p>' . "\n";
         foreach ($hints as $page => $problems) {
-            $o .= '<hr>' . "\n\n" . '<h4>' . $tx['link']['page']
-                . '<a href="?' . $u[$page] . '">' . $h[$page] . '</a></h4>' . "\n";
+            $o .= '<div id="xhLinkChPageDiv">' . "\n\n" . '<h2>' . $tx['link']['page']
+                . '<a href="?' . $u[$page] . '">' . $h[$page] . '</a></h2>' . "\n";
             if (isset($problems['errors'])) {
-                $o .= '<h5>' . $tx['link']['errors'] . '</h5>' . "\n"
+                $o .= '<h3 class="xhRed">' . $tx['link']['errors'] . '</h3>' . "\n"
                     . '<ul>' . "\n";
                 foreach ($problems['errors'] as $link) {
                     $o .= $this->reportError($link);
@@ -369,12 +369,12 @@ class LinkChecker
                 $o .= '</ul>' . "\n" . "\n";
             }
             if (isset($problems['caveats'])) {
-                $o .= '<h5>' . $tx['link']['hints'] . '</h5>' . "\n"
+                $o .= '<h3>' . $tx['link']['hints'] . '</h3>' . "\n"
                     . '<ul>' . "\n";
                 foreach ($problems['caveats'] as $link) {
                     $o .= $this->reportNotice($link);
                 }
-                $o .= '</ul>' . "\n";
+                $o .= '</ul></div>' . "\n";
             }
         }
         return $o;

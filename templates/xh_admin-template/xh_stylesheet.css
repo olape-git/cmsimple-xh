@@ -1,0 +1,891 @@
+/** Template: xh_admin_tpl
+	xh_stylesheet.css
+	The XH-Developers 2020
+**/
+
+* {
+	box-sizing: border-box;
+}
+html {
+	scroll-behavior: smooth;
+}
+body {
+	overflow-y: scroll;
+	font: normal 15px/1.25em system-ui, sans-serif;
+	margin: 0;
+	padding: 0;
+	background: rgba(0,0,0,.05) url(images/xh-logo-background.svg) repeat fixed;
+}
+/* top link */
+a#xhTop {
+	display: inline-block;
+	position: fixed;
+	bottom: .25em;
+	right: .25em;
+	font-size: 2em;
+	width: 32px;
+	height: 32px;
+	background-image: url(images/totop.svg);
+	background-color: transparent;
+	z-index: 1001;
+}
+a#xhTop:hover,
+a#xhTop:focus {
+	text-decoration: none;
+	background-color: rgba(0,0,0,.1);
+}
+/* plugin menu */
+#xhContainer table.edit {
+	font: 500 normal 15px/normal system-ui, sans-serif;
+	background: transparent;
+	margin: 0;
+	padding: 0;
+	border: 0;
+	border-collapse: collapse;
+	width: 100%;
+}
+#xhContainer table.edit:first-of-type {
+	margin-top: .5em;
+}
+#xhContainer table.edit:last-of-type {
+	margin-bottom: .5em;
+}
+#xhContainer table.edit td {
+	font: 500 normal 15px/normal system-ui, sans-serif;
+	text-align: center;
+	line-height: normal;
+	padding: 0;
+	float: left;
+	border-bottom: .25em solid transparent;
+}
+#xhContainer table.edit td:not(:last-child) {
+	border-right: .25em solid transparent;
+}
+#xhContainer table.edit td a,
+#xhContainer table.edit a:link {
+	background: #eee;
+	padding: .25em .5em;
+	color: #000;
+	display: block;
+	border: 1px solid #ccc;
+	text-decoration: none;
+	transition: none;
+}
+#xhContainer table.edit td a:hover {
+	background: #999;
+	border: 1px solid #999;
+	color: #fff;
+	text-decoration: none;
+}
+/* configuration */
+#xh_config_form {
+	font: normal 15px/1.25em system-ui, sans-serif;
+	color: #000;
+	margin: .5em 0;
+	position: relative;
+}
+#xh_config_form fieldset {
+	padding: .5em;
+	margin: 1em 0;
+	background: #f5f5f5;
+	border: 1px solid #ccc;
+}
+#xh_config_form fieldset legend {
+	font: 500 13px/normal system-ui, sans-serif;
+	color: #000;
+	padding: .1em .5em 0 .5em;
+	margin: 0 0 1.5em 0;
+	background: #eee;
+	width: auto;
+	text-transform: uppercase;
+	border: 1px solid #ccc;
+	border-bottom-color: #eee;
+	border-radius: .25em .25em 0 0;
+}
+#xh_config_form div.xh_label,
+#xh_config_form div.xh_field {
+	font: normal 15px/1.25em system-ui, sans-serif;
+	padding: 0;
+	margin: 0 0 .25em 0;
+	border: 0;
+	float: left;
+}
+#xh_config_form div.xh_label {
+	font: normal 15px/1.25em system-ui, sans-serif;
+	width: 37%;
+	padding: .25em;
+	background: #f9f9f9;
+	border: 1px solid #ddd;
+	text-align: right;
+	color: #666;
+	margin: 0 .25em .25em 0;
+}
+#xh_config_form div.xh_field {
+	width: calc(63% - 4px);
+}
+#xh_config_form .xh_field button {
+	margin: 0;
+}
+#xh_config_form .xh_field select,
+#xh_config_form div.xh_field {
+	font: normal 15px/1.25em system-ui, sans-serif;
+}
+#xh_config_form .xh_field select {
+	border: 1px solid #ccc;
+	padding: .125em;
+}
+#xh_config_form div.xh_label span.xh_label {
+	font: normal 15px/1.25em system-ui, sans-serif;
+	margin: 0;
+}
+#xh_config_form img {
+	margin: 0;
+}
+#xh_config_form input[type="checkbox"] {
+	margin: 0;
+	padding: 0;
+}
+#xh_config_form br {
+	clear: both;
+}
+#xh_config_form input.xh_setting,
+#xh_config_form input.cmsimplecore_settings,
+#xh_config_form textarea.xh_setting,
+#xh_config_form textarea.cmsimplecore_settings {
+	width: 100%;
+	font: normal 15px/1.25em system-ui, sans-serif;
+	color: #000;
+	padding: .25em;
+	margin-bottom: .25em;
+	border: 1px solid #ccc;
+	border-radius: 0;
+	background: #fff;
+}
+#xh_config_form textarea.xh_setting,
+#xh_config_form textarea.cmsimplecore_settings {
+	font: normal 15px/1.25em system-ui, sans-serif;
+	overflow: hidden;
+	background: #fff;
+}
+#xh_config_form textarea.xh_setting_short,
+#xh_config_form textarea.cmsimplecore_settings_short {
+	font: normal 15px/1.25em system-ui, sans-serif;
+	background: #fff;
+}
+#xh_config_form input[type="submit"],
+.xh_file_edit~input[type="submit"],
+.xh_config_form_advanced_button,
+#xh_change_password button,
+#xh_config_form .xhAccAll span {
+	font: 500 normal 15px/normal system-ui, sans-serif;
+	margin: .5em 0;
+	padding: .25em .5em;
+	background: #eee;
+	color: #000;
+	border: 1px solid #ccc;
+	border-radius: 0;
+	cursor: pointer;
+	height: auto;
+	text-transform: none;
+}
+#xh_config_form input[type="submit"]:hover,
+.xh_file_edit~input[type="submit"].submit:hover,
+.xh_config_form_advanced_button:hover,
+#xh_change_password button:hover,
+#xh_config_form .xhAccAll span:hover {
+	background: #999;
+	color: #fff;
+	border: 1px solid #999;
+}
+.xh_config_form_advanced_button {
+	display: block;
+	margin: 1em 0;
+}
+/* password change */
+#xh_change_password input {
+	font: normal 15px/1.25em system-ui, sans-serif;
+	color: #000;
+	padding: .25em;
+	margin-bottom: .25em;
+	border: 1px solid #ccc;
+	border-radius: 0;
+	background: #fff;
+}
+#xh_change_password button {
+	background: #fff;
+}
+#xh_change_password label {
+	font: 500 15px/1.25em system-ui, sans-serif;
+	display: inline-block;
+	min-width: 10em;
+	max-width: calc(37% - 1em - 2px);
+	color: #000;
+	padding: 0 .5em 0 0;
+	text-align: right;
+	font-weight: 500;
+}
+#xh_change_password p {
+	padding: 0;
+	margin: 0;
+}
+form#xh_change_password {
+	font: normal 15px/1.25em system-ui, sans-serif;
+	background: #eee;
+	border: 1px solid #ccc;
+	padding: 1em 1em .5em 1em;
+}
+#xhContainer {
+	font: normal 15px/1.25em system-ui, sans-serif;
+	background: #fff;
+	color: #000;
+	border: 1px solid #ccc;
+	padding: 2em 20px 4em 20px;
+	min-height: 100vh;
+	max-width: 980px;
+	margin: 0 auto;
+}
+#xhContainer b,
+#xhContainer strong,
+#xhContainer b i,
+#xhContainer strong em,
+#xhContainer i b,
+#xhContainer em strong {
+	font-weight: 700;
+}
+#xhContainer p {
+	margin: 0 0 .5em 0;
+}
+#xhContainer img {
+	box-shadow: none;
+}
+#xhContainer p:last-of-type {
+}
+#xhContainer a:not(.jstree-anchor) {
+	color: #337ab7;
+	text-decoration: none;
+	border: 0;
+}
+#xhContainer a[target="_blank"]::after {
+	content: "\00a0\f08e";
+	font: .5em FontAwesome;
+	padding: 0 0 0 .25em;
+	opacity: .75;
+}
+#xhContainer a:not(.jstree-anchor):focus,
+#xhContainer a:not(.jstree-anchor):hover {
+	color: #23527c;
+	text-decoration: underline;
+}
+#xhContainer h1,
+#xhContainer h2,
+#xhContainer h3,
+#xhContainer h4,
+#xhContainer h5,
+#xhContainer h6,
+p.xh1,
+p.xh2,
+p.xh3,
+p.xh4,
+p.xh5,
+p.xh6 {
+	text-transform: none;
+	color: #000;
+	margin-top: 1em;
+	margin-bottom: .25em;
+	font: 500 normal 15px/normal system-ui, sans-serif;
+	text-align: left;
+	text-shadow: none;
+}
+#xhContainer h1,
+p.xh1 {
+	font-size: 34px;
+}
+#xhContainer h1:first-of-type,
+#xhContainer p.xh1:first-of-type {
+	margin-top: .25em;
+}
+#xhContainer h2,
+p.xh2 {
+	font-size: 28px;
+}
+#xhContainer h3,
+p.xh3 {
+	font-size: 22px;
+}
+#xhContainer h4,
+p.xh4 {
+	font-size: 18px;
+}
+#xhContainer h5,
+p.xh5 {
+	font-size: 17px;
+}
+#xhContainer h6,
+p.xh6 {
+	font-size: 15px;
+}
+.xhMark {
+	font-size: .9em;
+	padding: 2px 4px;
+	background: #ffffa5;
+}
+.xhSmall {
+	font-size: .85em;
+}
+.xhTextLeft {
+	text-align: left;
+}
+.xhTextCenter {
+	text-align: center;
+}
+.xhTextRight {
+	text-align: right;
+}
+.xhTextJustify {
+	text-align: justify;
+}
+.xhTextNoWrap {
+	white-space: nowrap;
+}
+/* html tags */
+#xhContainer hr,
+hr.xhHr {
+	margin: .25em 0;
+	border: 0;
+	border-top: 1px solid #ccc;
+	box-shadow: none;
+}
+hr.xhHrFull {
+	margin: .25em -.5em;
+}
+#xhContainer code,
+code.xhCode,
+#xhContainer pre,
+pre.xhPre,
+#xhContainer kbd,
+kbd.xhKbd {
+	font: normal 14px/normal monospace;
+	color: #333;
+}
+#xhContainer pre,
+pre.xhPre {
+	display: block;
+	padding: .5em;
+	margin: .5em 0;
+	word-break: break-all;
+	word-wrap: break-word;
+	background-color: #f5f5f5;
+	border: 1px solid #ccc;
+	border-radius: 0;
+	overflow: auto;
+}
+#xhContainer code,
+code.xhCode {
+	padding: 1px 3px;
+	background-color: #f5f5f5;
+	border-radius: 4px;
+}
+/* lists */
+ul.xhListUnordered {
+	font: normal 15px/1.25em system-ui, sans-serif;
+	margin: .5em 0;
+	padding: 0 0 0 2em;
+	list-style: disc;
+}
+ul.xhListUnordered li {
+	list-style: disc;
+}
+ul.xhListUnordered ul {
+	margin: 0;
+	padding: 0 0 0 1em;
+	list-style: circle;
+}
+ul.xhListUnordered ul li {
+	list-style: circle;
+}
+ul.xhListUnordered ul ul {
+	margin: 0;
+	padding: 0 0 0 1em;
+	list-style: square;
+}
+ul.xhListUnordered ul ul li {
+	list-style: square;
+}
+ul.xhListUnordered li,
+ul.xhListUnordered ul li,
+ul.xhListUnordered ul ul li {
+	margin: 0;
+	padding: 0;
+}
+ul.xhListUnordered li:before,
+ul.xhListUnordered ul li:before,
+ul.xhListUnordered ul ul li:before,
+ul.xhListInline li:before {
+	content: '';
+	margin: 0;
+	padding: 0;
+}
+ol.xhListOrdered {
+	font: normal 15px/1.25em system-ui, sans-serif;
+	margin: .5em 0;
+	padding: 0 0 0 2em;
+	list-style: decimal;
+}
+ol.xhListOrdered ol {
+	margin: 0;
+	padding: 0 0 0 1em;
+	list-style: upper-alpha;
+}
+ol.xhListOrdered ol ol {
+	margin: 0;
+	padding: 0 0 0 1em;
+	list-style: lower-alpha;
+}
+ol.xhListOrdered li,
+ol.xhListOrdered ol li,
+ol.xhListOrdered ol ol li {
+	margin: 0;
+	padding: 0;
+}
+ol.xhListOrdered li:before,
+ol.xhListOrdered ol li:before,
+ol.xhListOrdered ol ol li:before {
+	content: '';
+	margin: 0;
+	padding: 0;
+}
+ul.xhListInline {
+	padding-left: 0;
+	margin: .5em -.5em;
+	list-style: none;
+}
+ul.xhListInline li {
+	display: inline-block;
+	padding: 0 .5em;
+}
+/* system check lists */
+ul.xhSysCheckList {
+	list-style: none;
+	padding-left: 0;
+	margin: .5em 0;
+}
+ul.xhSysCheckList li {
+	list-style: none;
+	padding: .5em .5em .5em 2em;
+	margin: 0 0 .25em 0;
+}
+ul.xhSysCheckList li.xhListCatStart {
+	margin: 1em 0 .25em 0;
+}
+#xhContainer dl,
+dl.xhDefList,
+dl.xhDefListHoriz {
+	font: normal 15px/1.25em system-ui, sans-serif;
+	margin: .5em 0;
+}
+#xhContainer dl dt,
+dl.xhDefList dt {
+	font-weight: 500;
+	margin: 0;
+	padding: 0;
+}
+#xhContainer dl dd,
+dl.xhDefList dd {
+	margin: 0;
+	padding: 0;
+}
+/* link checker */
+#xhLinkChPageDiv {
+	background: #f5f5f5;
+	border: 1px solid #ccc;
+	margin: 1em 0;
+	padding: 1em;
+}
+#xhLinkChPageDiv h2,
+#xhLinkChPageDiv h3 {
+	margin-top: 0;
+}
+#xh_linkchecker ul {
+	margin: 0;
+	padding: 0;
+	list-style: none;
+}
+#xh_linkchecker ul li {
+	padding: 0;
+	margin: 0;
+	list-style: none;
+	margin: .75em 0;
+}
+#xh_linkchecker ul li:before {
+	content: '';
+	padding: 0;
+	margin: 0;
+}
+#xhContainer .xhVersion {
+	background: #f5f5f5;
+	color: #666;
+	text-align: right;
+	padding: .1em .5em;
+	font-size: .75em;
+	border-bottom: 1px solid #ccc;
+	border-left: 1px solid #ccc;
+	top: 0;
+	right: 0;
+	position: absolute;
+}
+/* plugin list */
+ul#xhPluginList {
+	display: flex;
+	flex-wrap: wrap;
+	margin: 0;
+	padding: 0;
+	width: 100%;
+}
+ul#xhPluginList ul {
+	padding: 0 0 0 1em;
+}
+ul#xhPluginList li {
+	list-style: none;
+}
+ul#xhPluginList > li {
+	background: #f5f5f5;
+	border: 1px solid #ccc;
+	margin: 0 .5em .5em 0;
+	padding: .5em 1em;
+	width: calc(25% - .5em);
+}
+ul#xhPluginList > li > a {
+	font-weight: bold;
+}
+ul#xhPluginList li a {
+	color: #000 !important;
+	display: block;
+	padding: .1em .25em;
+}
+ul#xhPluginList li a:hover {
+}
+@media (max-width: 768px) {
+ul#xhPluginList > li {
+	width: calc(33% - .5em);
+}
+}
+@media (max-width: 640px) {
+ul#xhPluginList > li {
+	width: calc(50% - .5em);
+}
+}
+@media (max-width: 460px) {
+ul#xhPluginList > li {
+	width: calc(100% - .5em);
+}
+}
+/* backend accordions - config and language forms */
+#xh_config_form:after {
+	clear: both;
+	content: "";
+	display: block;
+}
+#xh_config_form .xhAccAll {
+	float: right;
+	position: relative;
+}
+#xh_config_form .xhAccAll span {
+	cursor: pointer;
+	display: inline-block;
+	margin: .5em 0 .5em .25em;
+	text-align: center;
+	width: 3em;
+}
+#xh_config_form .xhAccAll .xhAccAllOpen:after {
+	color: #000;
+	content: "+";
+}
+#xh_config_form .xhAccAll .xhAccAllClose:after {
+	color: #000;
+	content: "-";
+	display: inline-block;
+	transform: scaleX(1.5);
+}
+#xh_config_form .xhAccordion {
+	background: #f5f5f5;
+	border: 1px solid #ccc;
+	margin: .5em 0;
+	padding: 0;
+}
+#xh_config_form .xhAccordionTitle {
+	cursor: pointer;
+	padding: .5em;
+}
+#xh_config_form .xhAccordionTitle:hover {
+}
+#xh_config_form .xhAccordion:hover {
+	background-color: #eee;
+}
+#xh_config_form .xhAccordionTitle:after {
+	color: #000;
+	content: "+";
+	margin: 0;
+	position: absolute;
+	right: 1.2em;
+}
+#xh_config_form .xhAccAll .xhAccAllOpen:hover:after,
+#xh_config_form .xhAccAll .xhAccAllClose:hover:after {
+	color: #fff;
+}
+#xh_config_form .xhAccordionTitle.active,
+#xh_config_form.xhAccOpenLimited .xhAccordionTitle {
+	color: #337ab7;
+	font-weight: 500;
+	text-transform: uppercase;
+}
+#xh_config_form .xhAccordionTitle.active:after {
+	content: "-";
+	display: inline-block;
+	transform: scaleX(1.5);
+}
+#xh_config_form .xhAccordionContent {
+	box-sizing: content-box;
+	max-height: 0;
+	opacity: 0;
+	overflow: hidden;
+	padding: 0 .5em;
+	position: relative;
+	transition: all .25s linear;
+}
+#xh_config_form .xhAccordionTitle.active + .xhAccordionContent {
+	border-bottom: .5em solid transparent;
+	border-top: .5em solid transparent;
+	max-height: none !important;
+	opacity: 1;
+	overflow: visible;
+	transition: opacity .25s linear, padding .25s linear;
+}
+/* hidden config options (More/Less) */
+#xh_config_form_advanced .xhAccordionTitle.active + .xhAccordionContent {
+	max-height: none !important;
+}
+/* Plugins - if only 5 accordians, show this expanded. Adjustable in admin.min.js ( if(i <= 4) { ) */
+#xh_config_form.xhAccOpenLimited .xhAccAll {
+	display: none;
+}
+#xh_config_form.xhAccOpenLimited .xhAccordionContent {
+	border-bottom: 0.25em solid transparent;
+	border-top: 0.5em solid transparent;
+	max-height: none;
+	opacity: 1;
+	overflow: visible;
+	padding: 0 0.5em;
+	transition: none;
+}
+#xh_config_form.xhAccOpenLimited .xhAccordionTitle {
+	cursor: auto;
+	pointer-events: none;
+}
+#xh_config_form.xhAccOpenLimited .xhAccordionTitle:after {
+	content: none;
+}
+/* buttons */
+.xhButton,
+a.xhButton,
+input.xhButton,
+input[type="submit"],
+input[type="submit"].xhButton {
+	font: 500 normal 15px/normal system-ui, sans-serif;
+	margin: .25em 0;
+	box-sizing: border-box;
+	padding: .25em .5em;
+	background: #eee;
+	color: #000;
+	border: 1px solid #ccc;
+	border-radius: 0;
+	cursor: pointer;
+	text-decoration: none;
+	vertical-align: middle;
+	text-transform: none;
+	height: auto;
+	display: inline-block;
+}
+.xhButton:hover,
+.xhButton:focus,
+a.xhButton:hover,
+a.xhButton:focus,
+input[type="submit"].xhButton:hover,
+input[type="submit"].xhButton:focus,
+input[type="submit"]:hover,
+input[type="submit"]:focus {
+	background: #999;
+	color: #fff;
+	border: 1px solid #999;
+	text-decoration: none;
+}
+.xhButtonLight,
+a.xhButtonLight,
+input.xhButtonLight,
+input[type="submit"].xhButtonLight {
+	font: 500 normal 15px/normal system-ui, sans-serif;
+	margin: .25em 0;
+	padding: .25em .5em;
+	box-sizing: border-box;
+	background: #fff;
+	color: #000;
+	border: 1px solid #ccc;
+	border-radius: 0;
+	cursor: pointer;
+	text-decoration: none;
+	vertical-align: middle;
+	text-transform: none;
+	height: auto;
+	display: inline-block;
+}
+.xhButtonLight:hover,
+.xhButtonLight:focus,
+a.xhButtonLight:hover,
+a.xhButtonLight:focus,
+input[type="submit"].xhButtonLight:hover,
+input[type="submit"].xhButtonLight:focus {
+	background: #999;
+	color: #fff;
+	border: 1px solid #999;
+	text-decoration: none;
+}
+.xhButtonImg {
+	font: 500 normal 15px/normal system-ui, sans-serif;
+	color: #000;
+	cursor: pointer;
+	padding: 0;
+	margin: .25em 0;
+	background: transparent;
+	border: 0;
+	vertical-align: baseline;
+	text-transform: none;
+	height: auto;
+	display: inline-block;
+}
+.xhButtonImg:hover,
+.xhButtonImg:active,
+.xhButtonImg:focus {
+	outline: thin dotted;
+	outline: 5px auto -webkit-focus-ring-color;
+	outline-offset: 1px;
+}
+.xhButton img,
+.xhButtonLight img,
+.xhButtonImg img {
+	max-width: inherit;
+	vertical-align: baseline;
+}
+.xhButtonGroup {
+	margin: .5em 0;
+}
+.xhButtonGroup .xhButton,
+.xhButtonGroup .xhButtonLight,
+.xhButtonGroup .xhButtonImg {
+	margin: 0 4px 4px 0;
+}
+/* tables */
+.xhTable {
+	font: normal 15px/normal system-ui, sans-serif;
+	width: 100%;
+	max-width: 100%;
+	border-spacing: 0;
+	border-collapse: collapse;
+	margin: 10px 0;
+	background: #fff;
+	color: #000;
+}
+.xhTable > caption + thead > tr:first-child > td,
+.xhTable > caption + thead > tr:first-child > th,
+.xhTable > colgroup + thead > tr:first-child > td,
+.xhTable > colgroup + thead > tr:first-child > th,
+.xhTable > thead:first-child > tr:first-child > td,
+.xhTable > thead:first-child > tr:first-child > th {
+	border-top: 0;
+}
+.xhTable th {
+	font-weight: 500;
+	text-align: left;
+}
+.xhTable > tbody > tr > td,
+.xhTable > tbody > tr > th,
+.xhTable > tfoot > tr > td,
+.xhTable > tfoot > tr > th,
+.xhTable > thead > tr > td,
+.xhTable > thead > tr > th {
+	box-sizing: border-box;
+	padding: 2px;
+	line-height: normal;
+	vertical-align: top;
+	border-top: 1px solid #ccc;
+}
+.xhTable > thead > tr > th {
+	box-sizing: border-box;
+	vertical-align: bottom;
+	border-bottom: 1px solid #666;
+}
+.xhTableBordered {
+	border: 1px solid #ccc;
+}
+.xhTableBordered > tbody > tr > td,
+.xhTableBordered > tbody > tr > th,
+.xhTableBordered > tfoot > tr > td,
+.xhTableBordered > tfoot > tr > th,
+.xhTableBordered > thead > tr > td,
+.xhTableBordered > thead > tr > th {
+	border: 1px solid #ccc;
+}
+.xhTableNoBorder {
+	border: 0;
+}
+.xhTableNoBorder > tbody > tr > td,
+.xhTableNoBorder > tbody > tr > th,
+.xhTableNoBorder > tfoot > tr > td,
+.xhTableNoBorder > tfoot > tr > th,
+.xhTableNoBorder > thead > tr > td,
+.xhTableNoBorder > thead > tr > th {
+	border: 0;
+}
+.xhTableStriped > tbody > tr:nth-of-type(2n+1) {
+	background-color: #f5f5f5;
+}
+.xhTableHover > tbody > tr:hover {
+	background-color: #f5f5f5;
+}
+.xhTableResponsiveDiv {
+	min-height: .01%;
+	overflow-x: auto;
+}
+/* system check */
+#xh_system_check {
+	list-style: none;
+	padding-left: 0;
+	margin: .75em 0;
+}
+#xh_system_check ul {
+	list-style: none;
+	padding: 0;
+	margin: 0;
+}
+#xh_system_check li,
+#xh_system_check ul li {
+	padding: .475em .5em .5em 2em;
+	margin: 0 0 .25em 0;
+}
+#xh_system_check li:before,
+#xh_system_check ul li:before,
+li.xh_success:before,
+li.xh_warning:before,
+li.xh_fail:before {
+	content: '';
+	margin: 0;
+	padding: 0;
+	font: inherit;
+}
+#xh_system_check img {
+	padding-right: .5em;
+}
+#xh_system_check li.xh_system_check_cat_start {
+	margin: 1em 0 .25em 0;
+}
+#pagemanager_footer {
+	display: none;
+}
