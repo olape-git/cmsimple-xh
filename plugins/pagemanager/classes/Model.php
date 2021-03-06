@@ -76,6 +76,7 @@ class Model
     {
         $heading = trim(strip_tags($heading));
         $heading = html_entity_decode($heading, ENT_COMPAT, 'UTF-8');
+        $heading = str_replace('­', '|-|', $heading);
         return $heading;
     }
 

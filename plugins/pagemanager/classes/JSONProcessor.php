@@ -116,6 +116,7 @@ class JSONProcessor
             ? null
             : (int) preg_replace($pattern, '$1', $page['id']);
         $this->title = htmlspecialchars($page['text'], ENT_NOQUOTES, 'UTF-8');
+        $this->title = str_replace('|-|', '­', $this->title);
         $this->pdattr = $page['state']['checked'] ? '1' : '0';
         $this->mayRename = !preg_match('/unrenameable$/', $page['type']);
 
