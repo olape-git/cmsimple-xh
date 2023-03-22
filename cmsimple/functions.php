@@ -1291,7 +1291,7 @@ function XH_createLanguageFile($dst)
  */
 function pluginFiles($plugin)
 {
-    global $pth, $sl;
+    global $pth, $sl, $cf;
     static $helpFiles = array();
 
     $folders = array(
@@ -1311,8 +1311,25 @@ function pluginFiles($plugin)
     $pth['file']['plugin_index'] = $pth['folder']['plugin'] . 'index.php';
     $pth['file']['plugin_admin'] = $pth['folder']['plugin'] . 'admin.php';
 
-    $pth['file']['plugin_language'] = $pth['folder']['plugin_languages']
-        . strtolower($sl) . '.php';
+    //if (defined('XH_ADM')
+    if ((isset($_COOKIE['status'])
+    && $_COOKIE['status'] == 'adm')
+    && (isset($cf['language']['backend_to_default'])
+    && $cf['language']['backend_to_default'] == 'true')
+    && ($sl != $cf['language']['default'])) {
+        if ((!isset($_GET['admin'])
+        || (isset($_GET['admin']) && $_GET['admin'] != 'plugin_language'))
+        && (!$_POST)) {
+            $pth['file']['plugin_language'] = $pth['folder']['plugin_languages']
+                . strtolower($cf['language']['default']) . '.php';
+        } else {
+            $pth['file']['plugin_language'] = $pth['folder']['plugin_languages']
+                . strtolower($sl) . '.php';
+        }
+    } else {
+        $pth['file']['plugin_language'] = $pth['folder']['plugin_languages']
+            . strtolower($sl) . '.php';
+    }
 
     $pth['file']['plugin_classes'] = $pth['folder']['plugin_classes']
         . 'required_classes.php';

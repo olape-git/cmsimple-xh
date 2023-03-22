@@ -1017,6 +1017,21 @@ XH_URI_Cleaning();
 
 $_XH_controller->setFrontendF();
 
+/*
+ * Sets the backend language of the second languages to the default language
+ *
+*/
+if (XH_ADM
+&& (isset($cf['language']['backend_to_default'])
+&& $cf['language']['backend_to_default'] == 'true')
+&& ($sl != $cf['language']['default'])) {
+    if ((!isset($_GET['file'])
+    || (isset($_GET['file']) &&  $_GET['file'] != 'language'))) {
+        //$pth['file']['language'] = $pth['folder']['language'] . $cf['language']['default'] . '.php';
+        include_once $pth['folder']['language'] . $cf['language']['default'] . '.php';
+    }
+}
+
 if (is_readable($pth['folder']['cmsimple'] . 'userfuncs.php')) {
     include_once $pth['folder']['cmsimple'] . 'userfuncs.php';
 }

@@ -6,6 +6,7 @@ $mcf['security']['frame_options']="enum:DENY,SAMEORIGIN,";
 $mcf['site']['template']="function:XH_templates";
 $mcf['site']['compat']="hidden";
 $mcf['language']['default']="function:XH_availableLocalizations";
+$mcf['language']['backend_to_default']="bool";
 $mcf['language']['2nd_lang_names']="hidden";
 $mcf['mailform']['captcha']="bool";
 $mcf['mailform']['lf_only']="+bool";
