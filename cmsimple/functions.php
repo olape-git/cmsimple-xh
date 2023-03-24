@@ -1311,7 +1311,8 @@ function pluginFiles($plugin)
     $pth['file']['plugin_index'] = $pth['folder']['plugin'] . 'index.php';
     $pth['file']['plugin_admin'] = $pth['folder']['plugin'] . 'admin.php';
 
-    //if (defined('XH_ADM')
+    $pth['file']['plugin_language'] = $pth['folder']['plugin_languages']
+        . strtolower($sl) . '.php';
     if ((isset($_COOKIE['status'])
     && $_COOKIE['status'] == 'adm')
     && (isset($cf['language']['backend_to_default'])
@@ -1322,13 +1323,7 @@ function pluginFiles($plugin)
         && (!$_POST)) {
             $pth['file']['plugin_language'] = $pth['folder']['plugin_languages']
                 . strtolower($cf['language']['default']) . '.php';
-        } else {
-            $pth['file']['plugin_language'] = $pth['folder']['plugin_languages']
-                . strtolower($sl) . '.php';
         }
-    } else {
-        $pth['file']['plugin_language'] = $pth['folder']['plugin_languages']
-            . strtolower($sl) . '.php';
     }
 
     $pth['file']['plugin_classes'] = $pth['folder']['plugin_classes']

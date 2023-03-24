@@ -1027,7 +1027,6 @@ if (XH_ADM
 && ($sl != $cf['language']['default'])) {
     if ((!isset($_GET['file'])
     || (isset($_GET['file']) &&  $_GET['file'] != 'language'))) {
-        //$pth['file']['language'] = $pth['folder']['language'] . $cf['language']['default'] . '.php';
         include_once $pth['folder']['language'] . $cf['language']['default'] . '.php';
     }
 }
