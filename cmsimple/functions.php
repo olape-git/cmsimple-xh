@@ -1291,7 +1291,7 @@ function XH_createLanguageFile($dst)
  */
 function pluginFiles($plugin)
 {
-    global $pth, $sl;
+    global $pth, $sl, $cf;
     static $helpFiles = array();
 
     $folders = array(
@@ -1313,6 +1313,21 @@ function pluginFiles($plugin)
 
     $pth['file']['plugin_language'] = $pth['folder']['plugin_languages']
         . strtolower($sl) . '.php';
+    if ((isset($_COOKIE['status'])
+    && $_COOKIE['status'] == 'adm')) {
+        if ($cf['language']['backend'] != '-'
+        && $cf['language']['backend'] != $sl) {
+            if ((!isset($_GET['admin'])
+            || (isset($_GET['admin']) && $_GET['admin'] != 'plugin_language'))
+            && (!$_POST)) {
+                if (is_readable($pth['folder']['plugin_languages']
+                    . strtolower($cf['language']['backend']) . '.php')) {
+                    $pth['file']['plugin_language'] = $pth['folder']['plugin_languages']
+                        . strtolower($cf['language']['backend']) . '.php';
+                }
+            }
+        }
+    }
 
     $pth['file']['plugin_classes'] = $pth['folder']['plugin_classes']
         . 'required_classes.php';
@@ -1896,6 +1911,18 @@ function XH_availableLocalizations()
     }
     sort($languages, SORT_NATURAL | SORT_FLAG_CASE);
     return $languages;
+}
+
+/**
+ * Returns an array of available languages for backend (in cmsimple/languages/).
+ *
+ * @return array
+ */
+function XH_availableBackendLanguage()
+{
+    $backendLanguages = XH_availableLocalizations();
+    array_unshift($backendLanguages, '-');
+    return $backendLanguages;
 }
 
 /**

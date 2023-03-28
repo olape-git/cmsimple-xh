@@ -1017,6 +1017,21 @@ XH_URI_Cleaning();
 
 $_XH_controller->setFrontendF();
 
+/*
+ * Sets the backend language
+ *
+*/
+if (XH_ADM) {
+    if ($cf['language']['backend'] != '-'
+    && $cf['language']['backend'] != $sl) {
+        if ((!isset($_GET['file'])
+        || (isset($_GET['file']) && $_GET['file'] != 'language'))) {
+            include_once($pth['folder']['language']
+                       . $cf['language']['backend'] . '.php');
+        }
+    }
+}
+
 if (is_readable($pth['folder']['cmsimple'] . 'userfuncs.php')) {
     include_once $pth['folder']['cmsimple'] . 'userfuncs.php';
 }

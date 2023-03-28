@@ -26,11 +26,24 @@ abstract class PluginArrayFileEdit extends ArrayFileEdit
      */
     public function __construct()
     {
-        global $pth, $sl, $plugin;
+        global $pth, $sl, $plugin, $cf;
 
         $this->plugin = $plugin;
-        $this->metaLangFile = $pth['folder']['plugins'] . $plugin
-            . '/languages/meta' . $sl . '.php';
+        if (XH_ADM
+        && $cf['language']['backend'] != '-'
+        && $cf['language']['backend'] != $sl) {
+            $this->metaLangFile = $pth['folder']['plugins']
+                                . $plugin
+                                . '/languages/meta'
+                                . $cf['language']['backend']
+                                . '.php';
+        } else {
+            $this->metaLangFile = $pth['folder']['plugins']
+                                . $plugin
+                                . '/languages/meta'
+                                . $sl
+                                . '.php';
+        }
         parent::__construct();
     }
 

@@ -22,11 +22,23 @@ abstract class CoreArrayFileEdit extends ArrayFileEdit
      */
     public function __construct()
     {
-        global $pth, $sl, $file, $tx;
+        global $pth, $sl, $file, $tx, $cf;
 
         $this->filename = $pth['file'][$file];
         $this->caption = utf8_ucfirst($tx['filetype'][$file]);
-        $this->metaLangFile = $pth['folder']['language'] . 'meta' . $sl . '.php';
+        if (XH_ADM
+        && $cf['language']['backend'] != '-'
+        && $cf['language']['backend'] != $sl) {
+            $this->metaLangFile = $pth['folder']['language']
+                                . 'meta'
+                                . $cf['language']['backend']
+                                . '.php';
+        } else {
+            $this->metaLangFile = $pth['folder']['language']
+                                . 'meta'
+                                . $sl
+                                . '.php';
+        }
         parent::__construct();
     }
 
