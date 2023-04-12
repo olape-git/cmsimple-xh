@@ -99,18 +99,28 @@ class Editor
         /*
          * use english if tiny doesn't know $sl resp. $cf['default']['language']
          */
-         
-        if (file_exists($pluginPth . 'tinymce/langs/' . $sl . '.js')) {
+
+        if ($cf['language']['backend'] != '-'
+        && $cf['language']['backend'] != $sl
+        && file_exists($pluginPth 
+                    . 'tinymce/langs/'
+                    . $cf['language']['backend']
+                    . '.js')) {
+            $tiny_language = $cf['language']['backend'];
+        } elseif (file_exists($pluginPth
+                           . 'tinymce/langs/'
+                           . $sl
+                           . '.js')) {
             $tiny_language = $sl;
-        } elseif (file_exists(
-            $pluginPth . 'tinymce/langs/' . 
-            $cf['language']['default'] .  '.js'
-        )) {
+        } elseif (file_exists($pluginPth
+                            . 'tinymce/langs/'
+                            . $cf['language']['default']
+                            .  '.js')) {
             $tiny_language = $cf['language']['default'];
         } else {
             $tiny_language = 'en';
         }
-        
+
         /* %LANGUAGE% = language:"[lang]"  and language_url = path to 
          * tinymce language file(in regard to the TinyMCE CDN Variant) 
          * if lang other than en
