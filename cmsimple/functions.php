@@ -2406,6 +2406,18 @@ function XH_registeredExtendedSEOPlugins()
 }
 
 /**
+ * Returns the names of the registered languagemenu plugins.
+ *
+ * @return array
+ *
+ * @since 1.8.0
+ */
+function XH_registeredLanguagemenuPlugins()
+{
+    return XH_registerPluginType('languagemenu');
+}
+
+/**
  * Handles the shutdown of the script.
  *
  * <ul>
