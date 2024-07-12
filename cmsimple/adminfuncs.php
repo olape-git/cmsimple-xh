@@ -270,7 +270,7 @@ HTML;
     foreach ($temp as $i) {
         $checks['writable'][] = $pth['folder'][$i];
     }
-    $temp = array('config', 'log', 'language', 'content', 'template', 'stylesheet');
+    $temp = array('config', 'log', 'debug-log', 'language', 'content', 'template', 'stylesheet');
     foreach ($temp as $i) {
         $checks['writable'][] = $pth['file'][$i];
     }
@@ -354,15 +354,12 @@ function XH_settingsView()
             . utf8_ucfirst($tx['action']['edit']) . ' '
             . $tx['filetype'][$i] . '</a></li>' . "\n";
     }
-    foreach (array('log') as $i) {
-        $o .= '<li><a href="' . $sn . '?file=' . $i . '&amp;action=view">'
+    foreach (array('log', 'debug-log') as $i) {
+        $o .= '<li><a '
+            . ($i == 'debug-log' ? 'target="_blank" ' : '')
+            . 'href="' . $sn . '?file=' . $i . '&amp;action=view">'
             . utf8_ucfirst($tx['action']['view']) . ' '
             . $tx['filetype'][$i] . '</a></li>' . "\n";
-    }
-    if (is_readable($pth['file']['debug-log'])) {
-        $o .= '<li><a target="_blank" href="' . $sn . '?file=debug-log&amp;action=view">'
-            . utf8_ucfirst($tx['action']['view']) . ' '
-            . $tx['filetype']['debug_log'] . '</a></li>' . "\n";
     }
     $o .= '</ul>' . "\n";
 
@@ -655,9 +652,6 @@ function XH_adminMenu(array $plugins = array())
             'url' => $sn . '?&sysinfo'
         )
     );
-    if (!is_readable($pth['file']['debug-log'])) {
-        unset($settingsMenu[5]);
-    }
     $hiddenPlugins = explode(',', $cf['plugins']['hidden']);
     $hiddenPlugins = array_map('trim', $hiddenPlugins);
     $plugins = array_diff($plugins, $hiddenPlugins);
