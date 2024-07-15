@@ -338,7 +338,7 @@ HTML;
  */
 function XH_settingsView()
 {
-    global $sn, $tx, $pth;
+    global $sn, $tx;
 
     $o = '<p>' . $tx['settings']['warning'] . '</p>' . "\n"
         . '<h4>' . $tx['settings']['systemfiles'] . '</h4>' . "\n" . '<ul>' . "\n";
@@ -590,7 +590,7 @@ function XH_registerPluginMenuItem($plugin, $label = null, $url = null, $target 
  */
 function XH_adminMenu(array $plugins = array())
 {
-    global $sn, $edit, $s, $u, $cf, $tx, $su, $plugin_tx, $pth;
+    global $sn, $edit, $s, $u, $cf, $tx, $su, $plugin_tx;
 
     if ($s < 0) {
         $su = $u[0];
