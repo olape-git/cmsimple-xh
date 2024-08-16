@@ -43,6 +43,7 @@ $mcf['seo']['external']="xfunction:XH_registeredExtendedSEOPlugins";
 $mcf['mode']['advanced']="hidden";
 $mcf['format']['date']="enum:none,short,medium,long,full";
 $mcf['format']['time']="enum:none,short,medium,long,full";
+$mcf['show_config']['open_on_load']="+bool";
 $mcf['validate']['mailto']="+bool";
 $mcf['validate']['tel']="+bool";
 $mcf['validate']['redir']="+enum:0,1,2,3";

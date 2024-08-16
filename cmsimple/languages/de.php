@@ -32,9 +32,11 @@ $tx['action']['view']="ansehen";
 
 $tx['editmenu']['backups']="Sicherheitskopien";
 $tx['editmenu']['change_password']="Passwort";
+$tx['editmenu']['collapse_all']="alle schließen";
 $tx['editmenu']['configuration']="Konfiguration";
 $tx['editmenu']['downloads']="Downloads";
 $tx['editmenu']['edit']="Bearbeiten";
+$tx['editmenu']['expand_all']="alle öffnen";
 $tx['editmenu']['files']="Dateien";
 $tx['editmenu']['help']="Hilfe";
 $tx['editmenu']['images']="Bilder";
@@ -148,6 +150,8 @@ $tx['help']['folders_media']="Ein Unterordner der Benutzerdateien.";
 
 $tx['help']['format_date']="Das Datumsformat, wenn ext/intl verfügbar ist; andernfalls wird auf <code>\$tx['lastupdate']['format']</code> zurückgegriffen.";
 $tx['help']['format_time']="Das Zeitformat, wenn ext/intl verfügbar ist; andernfalls wird auf <code>\$tx['lastupdate']['format']</code> zurückgegriffen.";
+
+$tx['help']['show_config_open_on_load']="Beim Laden der Seiten für Konfigurations- und Spracheinstellungen alle Rubriken öffnen.";
 
 $tx['help']['validate_mailto'] = "Hinweis zu mailto-Links beim LinkCheck ausgeben?";
 $tx['help']['validate_tel'] = "Hinweis zu tel-Links beim LinkCheck ausgeben?";

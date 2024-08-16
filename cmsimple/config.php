@@ -56,6 +56,7 @@ $cf['editmenu']['external']="";
 $cf['seo']['external']="";
 $cf['title']['format']="{SITE} – {PAGE}";
 $cf['mode']['advanced']="";
+$cf['show_config']['open_on_load']="";
 $cf['format']['date']="long";
 $cf['format']['time']="short";
 $cf['validate']['mailto']="true";

@@ -8,7 +8,7 @@
  * @author    Peter Harteg <peter@harteg.dk>
  * @author    The CMSimple_XH developers <devs@cmsimple-xh.org>
  * @copyright 1999-2009 Peter Harteg
- * @copyright 2009-2023 The CMSimple_XH developers <https://www.cmsimple-xh.org/?About-CMSimple_XH/The-XH-Team>
+ * @copyright 2009-2024 The CMSimple_XH developers <https://www.cmsimple-xh.org/?About-CMSimple_XH/The-XH-Team>
  * @copyright GNU GPLv3 <http://www.gnu.org/licenses/gpl-3.0.en.html>
  */
 
@@ -1385,7 +1385,11 @@ if ($print) {
 
 if (XH_ADM) {
     $bjs .= '<script src="' . $pth['file']['adminjs']
-        . '"></script>' . PHP_EOL
+        . '"></script>' . "\n"
+        . ($cf['show_config']['open_on_load'] == 'true'
+            ? '<script>window.addEventListener("load", openAll, false)</script>' . "\n"
+            : ''
+           )
         . XH_adminJSLocalization();
 }
 

@@ -1629,3 +1629,105 @@ div.xhContainer .xhVersion {
 	right: 0 !important;
 	position: absolute !important;
 }
+/* backend accordions - config and language forms */
+#xh_config_form:after {
+	clear: both;
+	content: "";
+	display: block;
+}
+#xh_config_form .xhAccAll {
+	float: right;
+	position: relative;
+}
+#xh_config_form .xhAccAll span {
+	cursor: pointer;
+	display: inline-block;
+	margin: .5em 0 .5em .25em;
+	text-align: center;
+	width: 2em;
+}
+#xh_config_form .xhAccAll .xhAccAllOpen:after {
+	content: url("open_in_full.svg");
+}
+#xh_config_form .xhAccAll .xhAccAllClose:after {
+
+	content: url("close_fullscreen.svg");
+}
+#xh_config_form .xhAccordion {
+	background: #f5f5f5;
+	border: 1px solid #ccc;
+	margin: .5em 0;
+	padding: 0;
+}
+#xh_config_form .xhAccordionTitle {
+	cursor: pointer;
+	padding: .5em;
+}
+#xh_config_form .xhAccordionTitle:hover {
+}
+#xh_config_form .xhAccordion:hover {
+	background-color: #eee;
+}
+#xh_config_form .xhAccordionTitle:after {
+    content: url("unfold_more.svg");
+	margin: 0;
+	position: absolute;
+    right: .8em;
+}
+#xh_config_form .xhAccAll .xhAccAllOpen:hover:after,
+#xh_config_form .xhAccAll .xhAccAllClose:hover:after {
+	color: #fff;
+}
+#xh_config_form .xhAccordionTitle.active,
+#xh_config_form.xhAccOpenLimited .xhAccordionTitle {
+	color: #337ab7;
+	font-weight: 500;
+	text-transform: uppercase;
+}
+#xh_config_form .xhAccordionTitle.active:after {
+	content: url("unfold_less.svg");
+}
+#xh_config_form .xhAccordionContent {
+	box-sizing: content-box;
+	max-height: 0;
+	opacity: 0;
+	overflow: hidden;
+	padding: 0 .5em;
+	position: relative;
+	transition: all .25s linear;
+}
+#xh_config_form .xhAccordionTitle.active + .xhAccordionContent {
+	border-bottom: .5em solid transparent;
+	border-top: .5em solid transparent;
+	max-height: none !important;
+	opacity: 1;
+	overflow: visible;
+	transition: opacity .25s linear, padding .25s linear;
+}
+/* hidden config options (More/Less) */
+#xh_config_form_advanced .xhAccordionTitle.active + .xhAccordionContent {
+	max-height: none !important;
+}
+/* Plugins - if only 5 accordians, show this expanded. Adjustable in admin.min.js ( if(i <= 4) { ) */
+#xh_config_form.xhAccOpenLimited .xhAccAll {
+	display: none;
+}
+#xh_config_form.xhAccOpenLimited .xhAccordionContent {
+	border-bottom: 0.25em solid transparent;
+	border-top: 0.5em solid transparent;
+	max-height: none;
+	opacity: 1;
+	overflow: visible;
+	padding: 0 0.5em;
+	transition: none;
+}
+#xh_config_form.xhAccOpenLimited .xhAccordionTitle {
+	cursor: auto;
+	pointer-events: none;
+}
+#xh_config_form.xhAccOpenLimited .xhAccordionTitle:after {
+	content: none;
+}
+#xh_config_form .xhAccAllDeactivated {
+    opacity: 0.3;
+}

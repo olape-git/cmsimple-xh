@@ -32,9 +32,11 @@ $tx['action']['view']="view";
 
 $tx['editmenu']['backups']="Backups";
 $tx['editmenu']['change_password']="Password";
+$tx['editmenu']['collapse_all']="close all";
 $tx['editmenu']['configuration']="Configuration";
 $tx['editmenu']['downloads']="Downloads";
 $tx['editmenu']['edit']="Edit mode";
+$tx['editmenu']['expand_all']="open all";
 $tx['editmenu']['files']="Files";
 $tx['editmenu']['help']="Help";
 $tx['editmenu']['images']="Images";
@@ -148,6 +150,8 @@ $tx['help']['folders_media']="A subfolder of userfiles.";
 
 $tx['help']['format_date']="The date format if ext/intl is available; otherwise the date/time format falls back to <code>\$tx['lastupdate']['format']</code>.";
 $tx['help']['format_time']="The time format if ext/intl is available; otherwise the date/time format falls back to <code>\$tx['lastupdate']['format']</code>.";
+
+$tx['help']['show_config_open_on_load']="Open all sections when loading the pages for configuration and language settings.";
 
 $tx['help']['validate_mailto'] = "Output note about mailto links when checking links?";
 $tx['help']['validate_tel'] = "Output note about tel links when checking links?";

@@ -42,6 +42,7 @@ $mtx['scroll']="Scrollen";
 $mtx['sdoc']="Ebenenhervorhebung";
 $mtx['security']="Sicherheit";
 $mtx['seperator']="Trennzeichen";
+$mtx['show_config']="Konfigurations- oder Sprachdateien";
 $mtx['show_hidden']="versteckte Seiten anzeigen";
 $mtx['show_homepage']="Startseite anzeigen";
 $mtx['site']="Site";

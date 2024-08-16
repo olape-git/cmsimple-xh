@@ -8,7 +8,7 @@ namespace XH;
  * @author    Peter Harteg <peter@harteg.dk>
  * @author    The CMSimple_XH developers <devs@cmsimple-xh.org>
  * @copyright 1999-2009 Peter Harteg
- * @copyright 2009-2023 The CMSimple_XH developers <https://www.cmsimple-xh.org/?About-CMSimple_XH/The-XH-Team>
+ * @copyright 2009-2024 The CMSimple_XH developers <https://www.cmsimple-xh.org/?About-CMSimple_XH/The-XH-Team>
  * @copyright GNU GPLv3 <http://www.gnu.org/licenses/gpl-3.0.en.html>
  * @since     1.6
  */
@@ -269,25 +269,39 @@ abstract class ArrayFileEdit extends FileEdit
         $action = isset($this->plugin) ? $sn . '?&amp;' . $this->plugin : $sn;
         $value = utf8_ucfirst($tx['action']['save']);
         $button = '<input type="submit" class="submit" value="' . $value . '">';
+        /* $buttons_xhAccAll - backend accordion */
+        $buttons_xhAccAll = '<div class="xhAccAll">' . "\n"
+                          . '<span id="xhAccAllOpen" class="xhAccAllOpen" title="'
+                          . $tx['editmenu']['expand_all']
+                          . '"></span>'
+                          . '<span id="xhAccAllClose" class="xhAccAllClose" title="'
+                          . $tx['editmenu']['collapse_all']
+                          . '"></span>' . "\n"
+                          . '</div>';
         if (isset($_GET['xh_success'])) {
             $filetype = utf8_ucfirst($tx['filetype'][$_GET['xh_success']]);
             $message = XH_message('success', $tx['message']['saved'], $filetype);
         } else {
             $message = '';
         }
-        $o = '<h1>' . $this->caption . '</h1>' . $message
+        $o = '<h1>' . $this->caption . '</h1>' . $message . "\n"
             . '<form id="xh_config_form" action="' . $action
             . '" method="post" accept-charset="UTF-8">'
-            . $button
+            . "\n"
+            . $button . "\n"
+            . $buttons_xhAccAll . "\n"
             . $this->renderFormFields(false)
             . '<div id="xh_config_form_advanced">'
-            . $this->renderFormFields(true) . '</div>';
+            . $this->renderFormFields(true) . '</div>' . "\n";
         foreach ($this->params as $param => $value) {
             $o .= '<input type="hidden" name="' . $param . '" value="'
-                . $value . '">';
+                . $value . '">' . "\n";
         }
         $o .= $_XH_csrfProtection->tokenInput();
-        $o .= $button . '</form>';
+        $o .= $button
+            . "\n"
+            . '</form>'
+            . "\n";
 
         return $o;
     }
@@ -305,8 +319,12 @@ abstract class ArrayFileEdit extends FileEdit
         foreach ($this->cfg as $category => $options) {
             $hasVisibleFields = $this->hasVisibleFields($options, $advanced);
             if ($hasVisibleFields) {
-                $o .= '<fieldset><legend>' . $this->translate($category)
-                    . '</legend>';
+                // backend accordion
+                $o .= '<div class="xhAccordion">' . "\n"
+                    . '<div class="xhAccordionTitle">'
+                    . $this->translate($category)
+                    . '</div>' . "\n"
+                    . '<div class="xhAccordionContent">' . "\n";
             }
             foreach ($options as $name => $opt) {
                 if ($opt['isAdvanced'] != $advanced) {
@@ -319,21 +337,21 @@ abstract class ArrayFileEdit extends FileEdit
                     $displayName = $name != ''
                         ? str_replace('_', ' ', $name)
                         : $category;
-                    $o .= '<div class="xh_label">'
+                    $o .= '<div class="xh_label">' . "\n"
                         . $info . '<span class="xh_label">'
                         . $this->translate($displayName) . '</span>';
                     if ($category == 'meta' && $name == 'description') {
                         $o .= ' <span id="xh_description_length">['
                             . utf8_strlen($opt['val']) . ']</span>';
                     }
-                    $o .= '</div>'
-                        . '<div class="xh_field">'
+                    $o .= '</div>' . "\n"
+                        . '<div class="xh_field">' . "\n"
                         . $this->formField($category, $name, $opt) . '</div>'
                         . '<br>';
                 }
             }
             if ($hasVisibleFields) {
-                $o .= '</fieldset>';
+                $o .= '</div>' . "\n" . '</div>' . "\n";
             }
         }
         return $o;
