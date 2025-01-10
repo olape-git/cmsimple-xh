@@ -169,10 +169,13 @@ class Search
     private function resultLinks($words)
     {
         $resultLinkArray = array();
+        $peri = urlencode('"');
         foreach($words as $searchString) {
             $searchString = XH_hsc($searchString);
             $singleLink = '<a rel="nofollow" href="?search='
-                        . $searchString
+                        . (strpos($searchString, ' ') !== false
+                            ? $peri . $searchString . $peri
+                            : $searchString)
                         . '&function=search">'
                         . $searchString
                         . '</a>';
