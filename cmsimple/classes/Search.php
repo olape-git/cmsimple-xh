@@ -162,6 +162,26 @@ class Search
     }
 
     /**
+     * Returns links for search results view.
+     *
+     * @return Array
+     */
+    private function resultLinks($words)
+    {
+        $resultLinkArray = array();
+        foreach($words as $searchString) {
+            $searchString = XH_hsc($searchString);
+            $singleLink = '<a rel="nofollow" href="?search='
+                        . $searchString
+                        . '&function=search">'
+                        . $searchString
+                        . '</a>';
+            $resultLinkArray[] = $singleLink;
+        }
+        return $resultLinkArray;
+    }
+
+    /**
      * Returns a message how often the search string was found.
      *
      * @param int $count How often the search string was found.
@@ -183,23 +203,19 @@ class Search
         } else {
             $key = 'found_5';
         }
-        $links = '';
+        $resultLinkArray = array();
         $words = $this->getWords();
-        if (count($words) > 1) {
-            foreach($words as $searchString) {
-                $searchString = XH_hsc($searchString);
-                $singleLink = '<a rel="nofollow" href="?search='
-                            . $searchString
-                            . '&function=search">'
-                            . $searchString
-                            . '</a>';
-                $links .= $singleLink . ' ';
-            }
-            $links = rtrim($links);
+        $countWords = count($words);
+        if ($countWords > 1) {
+            $resultLinks = implode(' ', $this->resultLinks($words));
+        } elseif ($countWords === 1
+          && strpos($words[0], ' ') !== false) {
+            $searchStringArray = explode(' ', $words[0]);
+            $resultLinks = implode(' ', $this->resultLinks($searchStringArray));
         } else {
-            $links = XH_hsc($this->searchString);
+            $resultLinks = XH_hsc($this->searchString);
         }
-        $message = sprintf($tx['search'][$key], $links, $count);
+        $message = sprintf($tx['search'][$key], $resultLinks, $count);
         $message = '<p>' . $message . '</p>';
         return $message;
     }
