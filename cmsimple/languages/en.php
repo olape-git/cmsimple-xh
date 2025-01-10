@@ -279,6 +279,7 @@ $tx['search']['found_2-4']="\"%s\" was found in %d pages:";
 $tx['search']['found_5']="\"%s\" was found in %d pages:";
 $tx['search']['label']="Search terms";
 $tx['search']['notfound']="\"%s\" was not found.";
+$tx['search']['notempty']="The entry must not be empty.";
 $tx['search']['result']="Result of your search";
 
 $tx['settings']['backup']="Content file";

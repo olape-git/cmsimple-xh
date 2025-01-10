@@ -421,6 +421,7 @@ function content()
         if (isset($_GET['search'])) {
             $search = XH_hsc(trim(preg_replace('/\s+/u', ' ', $_GET['search'])));
             $words = explode(' ', $search);
+            $words = str_replace('___', ' ', $words);
             $c[$s] = XH_highlightSearchWords($words, $c[$s]);
         }
         $o .= preg_replace('/#CMSimple (.*?)#/is', '', $c[$s]);

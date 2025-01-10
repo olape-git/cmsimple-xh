@@ -64,7 +64,16 @@ class Search
     private function getWords()
     {
         if (!isset($this->words)) {
-            $words = explode(' ', $this->searchString);
+            preg_match_all('/"([^"]*)"/is', $this->searchString, $matches);
+            if (count($matches[0]) > 0) {
+                $cleanupSearchString = str_replace($matches[0], '', $this->searchString);
+                $cleanupSearchString = trim(preg_replace('/\s+/u', ' ', $cleanupSearchString));
+                $words = explode(' ', $cleanupSearchString);
+                $words = array_merge($words, $matches[1]);
+                $words = array_filter($words);
+            } else {
+                $words = explode(' ', $this->searchString);
+            }
             $this->words = array();
             foreach ($words as $word) {
                 $word = trim($word);
@@ -159,11 +168,13 @@ class Search
      *
      * @return string HTML
      */
-    private function foundMessage($count)
+    private function foundMessage($count, $word = false)
     {
         global $tx;
 
-        if ($count == 0) {
+        if ($word === false) {
+            $key = 'notempty';
+        } elseif ($count == 0) {
             $key = 'notfound';
         } elseif ($count == 1) {
             $key = 'found_1';
@@ -172,8 +183,23 @@ class Search
         } else {
             $key = 'found_5';
         }
-        $message = sprintf($tx['search'][$key], $this->searchString, $count);
-        $message = XH_hsc($message);
+        $links = '';
+        $words = $this->getWords();
+        if (count($words) > 1) {
+            foreach($words as $searchString) {
+                $searchString = XH_hsc($searchString);
+                $singleLink = '<a rel="nofollow" href="?search='
+                            . $searchString
+                            . '&function=search">'
+                            . $searchString
+                            . '</a>';
+                $links .= $singleLink . ' ';
+            }
+            $links = rtrim($links);
+        } else {
+            $links = XH_hsc($this->searchString);
+        }
+        $message = sprintf($tx['search'][$key], $links, $count);
         $message = '<p>' . $message . '</p>';
         return $message;
     }
@@ -190,11 +216,17 @@ class Search
         $cf['meta']['robots'] = 'noindex, nofollow';
         $o = '<h1>' . $tx['search']['result'] . '</h1>';
         $words = $this->getWords();
+        if (count($words) === 0) {
+            $o .= $this->foundMessage(0, false)
+                . "\n";
+            return $o;
+        }
         $pages = $this->search();
         $count = count($pages);
-        $o .= $this->foundMessage($count) . "\n";
+        $o .= $this->foundMessage($count, true) . "\n";
         if ($count > 0) {
             $o .= '<ul class="xh_search_results">' . "\n";
+            $words = str_replace(' ', '___', $words);
             $words = implode(' ', $words);
             foreach ($pages as $i) {
                 $pageData = $pd_router->find_page($i);
