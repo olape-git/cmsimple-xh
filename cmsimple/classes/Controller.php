@@ -514,12 +514,10 @@ class Controller
         if ($cf['security']['cookie'] != '') {
             $cookiePre = '__Secure-';
         }
+        if (empty($_COOKIE[$cookiePre . 'status'])) {
+            $o .= '<div class="xh_warning">' . $tx['error']['nocookies'] . '</div>' . "\n";
+        }
         $o .= <<<EOT
-<script>
-if (document.cookie.indexOf('{$cookiePre}status=adm') == -1) {
-    document.write('<div class="xh_warning">{$tx['error']['nocookies']}<\/div>');
-}
-</script>
 <noscript><div class="xh_warning">{$tx['error']['nojs']}</div></noscript>
 <script>
 setInterval(function() {
