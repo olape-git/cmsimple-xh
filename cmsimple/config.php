@@ -5,6 +5,7 @@ $cf['password']['min_length']="8";
 $cf['password']['max_remaining_time']="300";
 $cf['security']['secret']="b41bd1913a2a5412f41cabcf";
 $cf['security']['email']="";
+$cf['security']['cookie']="";
 $cf['security']['frame_options']="";
 $cf['site']['template']="fhs-simple-2019";
 $cf['site']['timezone']="";

@@ -191,7 +191,23 @@ class Controller
                     $cf['security']['password'] = password_hash($keycut, PASSWORD_BCRYPT, ['cost' => 12]);
                     $this->saveConfig($pth['file']['config'], $cf);
                 }
-                setcookie('status', 'adm', 0, CMSIMPLE_ROOT);
+                $cookiePre = '';
+                $cookieSecure = false;
+                if ($cf['security']['cookie'] != '') {
+                    $cookiePre = '__Secure-';
+                    $cookieSecure = true;
+                }
+                setcookie(
+                    $cookiePre . 'status',
+                    'adm',
+                    [
+                        'expires' => 0,
+                        'path' => CMSIMPLE_ROOT,
+                        'secure' => $cookieSecure,
+                        'httponly' => true,
+                        'samesite' => 'Lax'
+                    ]
+                );
                 XH_startSession();
                 session_regenerate_id(true);
                 $_SESSION['xh_password'] = $cf['security']['password'];
@@ -232,13 +248,29 @@ class Controller
      */
     public function handleLogout()
     {
-        global $adm, $f, $logout, $tx, $o;
+        global $adm, $cf, $f, $logout, $tx, $o;
 
         if ($logout != 'no_backup') {
             $o .= XH_backup();
         }
         $adm = false;
-        setcookie('status', '', 0, CMSIMPLE_ROOT);
+        $cookiePre = '';
+        $cookieSecure = false;
+        if ($cf['security']['cookie'] != '') {
+            $cookiePre = '__Secure-';
+            $cookieSecure = true;
+        }
+        setcookie(
+            $cookiePre . 'status',
+            '',
+            [
+                'expires' => time() - 7200,
+                'path' => CMSIMPLE_ROOT,
+                'secure' => $cookieSecure,
+                'httponly' => true,
+                'samesite' => 'Lax'
+            ]
+        );
         XH_startSession();
         session_regenerate_id(true);
         unset($_SESSION['xh_password']);
@@ -475,12 +507,16 @@ class Controller
      */
     public function outputAdminScripts()
     {
-        global $tx, $o;
+        global $cf, $tx, $o;
 
         $interval = 1000 * ((int) ini_get('session.gc_maxlifetime') - 1);
+        $cookiePre = '';
+        if ($cf['security']['cookie'] != '') {
+            $cookiePre = '__Secure-';
+        }
         $o .= <<<EOT
 <script>
-if (document.cookie.indexOf('status=adm') == -1) {
+if (document.cookie.indexOf('{$cookiePre}status=adm') == -1) {
     document.write('<div class="xh_warning">{$tx['error']['nocookies']}<\/div>');
 }
 </script>
@@ -505,24 +541,71 @@ EOT;
      */
     public function setFunctionsAsPermitted()
     {
-        global $edit, $normal;
+        global $cf, $edit, $normal;
+
+        $cookiePre = '';
+        $cookieSecure = false;
+        if ($cf['security']['cookie'] != '') {
+            $cookiePre = '__Secure-';
+            $cookieSecure = true;
+        }
 
         if (XH_ADM) {
             if ($edit) {
-                setcookie('mode', 'edit', 0, CMSIMPLE_ROOT);
+                setcookie(
+                    $cookiePre . 'mode',
+                    'edit',
+                    [
+                        'expires' => 0,
+                        'path' => CMSIMPLE_ROOT,
+                        'secure' => $cookieSecure,
+                        'httponly' => true,
+                        'samesite' => 'Lax'
+                    ]
+                );
             }
             if ($normal) {
-                setcookie('mode', '', 0, CMSIMPLE_ROOT);
+                setcookie(
+                    $cookiePre . 'mode',
+                    '',
+                    [
+                        'expires' => 0,
+                        'path' => CMSIMPLE_ROOT,
+                        'secure' => $cookieSecure,
+                        'httponly' => true,
+                        'samesite' => 'Lax'
+                    ]
+                );
             }
-            if (gc('mode') == 'edit' && !$normal) {
+            if (gc($cookiePre . 'mode') == 'edit' && !$normal) {
                 $edit = true;
             }
         } else {
-            if (gc('status') != '') {
-                setcookie('status', '', 0, CMSIMPLE_ROOT);
+            if (gc($cookiePre . 'status') != '') {
+                setcookie(
+                    $cookiePre . 'status',
+                    '',
+                    [
+                        'expires' => time() - 7200,
+                        'path' => CMSIMPLE_ROOT,
+                        'secure' => $cookieSecure,
+                        'httponly' => true,
+                        'samesite' => 'Lax'
+                    ]
+                );
             }
-            if (gc('mode') == 'edit') {
-                setcookie('mode', '', 0, CMSIMPLE_ROOT);
+            if (gc($cookiePre . 'mode') == 'edit') {
+                setcookie(
+                    $cookiePre . 'mode',
+                    '',
+                    [
+                        'expires' => time() - 7200,
+                        'path' => CMSIMPLE_ROOT,
+                        'secure' => $cookieSecure,
+                        'httponly' => true,
+                        'samesite' => 'Lax'
+                    ]
+                );
             }
         }
     }

@@ -4,6 +4,7 @@ $mcf['security']['password']="hidden";
 $mcf['password']['min_length']="hidden";
 $mcf['password']['max_remaining_time']="hidden";
 $mcf['security']['secret']="random";
+$mcf['security']['cookie']="bool";
 $mcf['security']['frame_options']="enum:DENY,SAMEORIGIN,";
 $mcf['site']['template']="function:XH_templates";
 $mcf['site']['compat']="+bool";
