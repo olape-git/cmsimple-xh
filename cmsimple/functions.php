@@ -2429,7 +2429,19 @@ function XH_startSession()
         $sessionName = 'XH_' . bin2hex(CMSIMPLE_ROOT);
         file_put_contents("{$pth['folder']['cmsimple']}.sessionname", $sessionName);
         session_name($sessionName);
-        session_start();
+        $cookieSecure = false;
+        if (!empty($_SERVER['HTTPS'])
+        && $_SERVER['HTTPS'] != 'off') {
+            $cookieSecure = true;
+        }
+        session_start([
+            'cookie_path' => CMSIMPLE_ROOT,
+            'cookie_lifetime' => 0,
+            'cookie_secure' => $cookieSecure,
+            'cookie_httponly' => true,
+            'cookie_samesite' => 'lax',
+            ]
+        );
     }
 }
 
